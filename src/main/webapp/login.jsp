@@ -55,7 +55,7 @@
         </c:if>
 
         <!-- 登录必须交给 LoginServlet 处理，不能用 onclick 直接跳 main.html。 -->
-        <form action="<%= loginAction %>" method="post">
+        <form action="<%= loginAction %>" method="get">
             <ul>
                 <li>
                     <input name="username" type="text" class="loginuser"

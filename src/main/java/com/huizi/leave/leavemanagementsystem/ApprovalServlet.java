@@ -1,0 +1,7 @@
+package com.huizi.leave.leavemanagementsystem;
+import com.huizi.leave.leavemanagementsystem.util.DBUtil; import javax.servlet.ServletException; import javax.servlet.annotation.WebServlet; import javax.servlet.http.*; import java.io.IOException; import java.sql.*;
+@WebServlet("/approval") public class ApprovalServlet extends HttpServlet {
+ protected void doGet(HttpServletRequest r,HttpServletResponse s)throws ServletException,IOException{if(!teacher(r)){s.sendError(403);return;}try(Connection c=DBUtil.getConnection();Statement p=c.createStatement();ResultSet x=p.executeQuery("SELECT * FROM leave_request ORDER BY created_at DESC")){r.setAttribute("requests",x);r.getRequestDispatcher("/public/approval.jsp").forward(r,s);}catch(SQLException e){throw new ServletException("读取审批记录失败",e);}}
+ protected void doPost(HttpServletRequest r,HttpServletResponse s)throws IOException{if(!teacher(r)){s.sendError(403);return;}try(Connection c=DBUtil.getConnection();PreparedStatement p=c.prepareStatement("UPDATE leave_request SET status=?,reviewer_id=?,review_comment=? WHERE id=?")){p.setString(1,r.getParameter("status"));p.setLong(2,(Long)r.getSession().getAttribute("userId"));p.setString(3,r.getParameter("comment"));p.setLong(4,Long.parseLong(r.getParameter("id")));p.executeUpdate();s.sendRedirect(r.getContextPath()+"/approval");}catch(Exception e){throw new IOException("审批失败",e);}}
+ private boolean teacher(HttpServletRequest r){return r.getSession(false)!=null&&"teacher".equals(r.getSession().getAttribute("userType"));}
+}

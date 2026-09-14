@@ -19,7 +19,17 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/login.jsp").forward(request, response);
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        if (username == null || password == null) {
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            return;
+        }
+        response.setContentType("text/html;charset=UTF-8");
+        System.out.println("访问servlet");
+        System.out.println("用户名" + username);
+        System.out.println("密码" + password);
+        response.getWriter().println(username + "登录成功");
     }
 
     @Override
@@ -40,6 +50,9 @@ public class LoginServlet extends HttpServlet {
                 user = findTeacher(connection, username, password);
             }
             if (user == null) {
+                user = findSystemUser(connection, username, password);
+            }
+            if (user == null) {
                 showError(request, response, "账号或密码错误");
                 return;
             }
@@ -53,7 +66,7 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/public/main.jsp");
         } catch (SQLException e) {
             log("登录查询失败", e);
-            showError(request, response, "系统暂时无法登录，请检查 qingjia 数据库连接");
+            showError(request, response, "数据库登录失败：" + e.getMessage());
         }
     }
 
@@ -99,6 +112,24 @@ public class LoginServlet extends HttpServlet {
                 return resultSet.next() ? resultSet.getInt("roleid") : 0;
             }
         }
+    }
+
+    /** 兼容项目注册功能使用的 t_user 表（例如 admin/123456）。 */
+    private LoginUser findSystemUser(Connection connection, String username, String password)
+            throws SQLException {
+        String sql = "SELECT id, username, real_name, role FROM t_user WHERE username = ? AND password = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, username);
+            statement.setString(2, password);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    int role = resultSet.getInt("role");
+                    return new LoginUser(resultSet.getLong("id"), resultSet.getString("real_name"),
+                            resultSet.getString("username"), "admin", role);
+                }
+            }
+        }
+        return null;
     }
 
     private void showError(HttpServletRequest request, HttpServletResponse response, String message)
