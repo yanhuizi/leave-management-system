@@ -33,7 +33,23 @@ public class DBUtil {
     }
 
     public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(url, username, password);
+        Connection connection = DriverManager.getConnection(url, username, password);
+        ensureLeaveTable(connection);
+        return connection;
+    }
+
+    /** 老师的 qingjia.sql 不包含本项目新增的请假业务表，首次连接时自动补齐。 */
+    private static void ensureLeaveTable(Connection connection) throws SQLException {
+        String sql = "CREATE TABLE IF NOT EXISTS leave_request (" +
+                "id BIGINT PRIMARY KEY AUTO_INCREMENT," +
+                "student_id BIGINT NOT NULL, student_num VARCHAR(50) NOT NULL," +
+                "student_name VARCHAR(100) NOT NULL, type VARCHAR(20) NOT NULL," +
+                "start_time DATETIME NOT NULL, end_time DATETIME NOT NULL," +
+                "reason VARCHAR(500) NOT NULL, status VARCHAR(20) NOT NULL DEFAULT '待审批'," +
+                "reviewer_id BIGINT NULL, review_comment VARCHAR(500) NULL," +
+                "created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP," +
+                "INDEX idx_leave_student(student_id), INDEX idx_leave_status(status))";
+        try (Statement statement = connection.createStatement()) { statement.executeUpdate(sql); }
     }
 
     public static void close(Connection c, Statement s, ResultSet r) {

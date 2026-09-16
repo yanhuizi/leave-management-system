@@ -12,4 +12,17 @@
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
+
+    <context-param><param-name>applicationName</param-name><param-value>请假管理系统</param-value></context-param>
+    <servlet>
+        <servlet-name>appStartup</servlet-name>
+        <servlet-class>com.huizi.leave.leavemanagementsystem.AppStartupServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping><servlet-name>appStartup</servlet-name><url-pattern>/app-status</url-pattern></servlet-mapping>
+
+    <servlet><servlet-name>wildcardServlet</servlet-name><servlet-class>com.huizi.leave.leavemanagementsystem.WildcardServlet</servlet-class></servlet>
+    <servlet-mapping><servlet-name>wildcardServlet</servlet-name><url-pattern>/demo/*</url-pattern></servlet-mapping>
+    <servlet><servlet-name>genericDemo</servlet-name><servlet-class>com.huizi.leave.leavemanagementsystem.GenericDemoServlet</servlet-class><load-on-startup>2</load-on-startup></servlet>
+    <servlet-mapping><servlet-name>genericDemo</servlet-name><url-pattern>/generic-demo</url-pattern></servlet-mapping>
 </web-app>

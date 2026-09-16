@@ -39,8 +39,8 @@
 
     <ul class="iconlist">
         <li><img src="<%= contextPath %>/images/ico01.png" alt="管理设置" /><p><a href="#">管理设置</a></p></li>
-        <li><img src="<%= contextPath %>/images/ico02.png" alt="请假申请" /><p><a href="#">请假申请</a></p></li>
-        <li><img src="<%= contextPath %>/images/ico03.png" alt="审批管理" /><p><a href="#">审批管理</a></p></li>
+        <li><img src="<%= contextPath %>/images/ico02.png" alt="请假申请" /><p><a href="<%= contextPath %>/leave" target="_top">请假申请</a></p></li>
+        <li><img src="<%= contextPath %>/images/ico03.png" alt="审批管理" /><p><a href="<%= contextPath %>/approval" target="_top">审批管理</a></p></li>
         <li><img src="<%= contextPath %>/images/ico04.png" alt="文件上传" /><p><a href="#">文件上传</a></p></li>
         <li><img src="<%= contextPath %>/images/ico05.png" alt="目录管理" /><p><a href="#">目录管理</a></p></li>
         <li><img src="<%= contextPath %>/images/ico06.png" alt="查询" /><p><a href="#">查询</a></p></li>

@@ -41,8 +41,8 @@
         <ul class="menuson">
             <li class="active"><cite></cite><a href="<%= contextPath %>/public/index.jsp" target="rightFrame">首页</a><i></i></li>
             <li><cite></cite><a href="#" target="rightFrame">数据列表</a><i></i></li>
-            <li><cite></cite><a href="#" target="rightFrame">请假申请</a><i></i></li>
-            <li><cite></cite><a href="#" target="rightFrame">审批管理</a><i></i></li>
+            <c:if test="${sessionScope.userType == 'student'}"><li><cite></cite><a href="<%= contextPath %>/leave" target="rightFrame">请假申请</a><i></i></li><li><cite></cite><a href="<%= contextPath %>/leave/list" target="rightFrame">我的申请</a><i></i></li></c:if>
+            <c:if test="${sessionScope.userType == 'teacher' || sessionScope.userType == 'admin'}"><li><cite></cite><a href="<%= contextPath %>/approval" target="rightFrame">审批管理</a><i></i></li></c:if>
             <li><cite></cite><a href="#" target="rightFrame">用户管理</a><i></i></li>
         </ul>
     </dd>

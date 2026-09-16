@@ -21,15 +21,15 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        if (username == null || password == null) {
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
+        if (username != null && password != null) {
+            response.setContentType("text/html;charset=UTF-8");
+            System.out.println("访问servlet");
+            System.out.println("用户名" + username);
+            System.out.println("密码" + password);
+            response.getWriter().println(username + "登录成功");
             return;
         }
-        response.setContentType("text/html;charset=UTF-8");
-        System.out.println("访问servlet");
-        System.out.println("用户名" + username);
-        System.out.println("密码" + password);
-        response.getWriter().println(username + "登录成功");
+        request.getRequestDispatcher("/login.jsp").forward(request, response);
     }
 
     @Override
@@ -45,12 +45,13 @@ public class LoginServlet extends HttpServlet {
         }
 
         try (Connection connection = DBUtil.getConnection()) {
-            LoginUser user = findStudent(connection, username, password);
-            if (user == null) {
-                user = findTeacher(connection, username, password);
-            }
-            if (user == null) {
-                user = findSystemUser(connection, username, password);
+            LoginUser user = safeStudent(connection, username, password);
+            if (user == null) user = safeTeacher(connection, username, password);
+            if (user == null) user = safeSystemUser(connection, username, password);
+            if (user == null) user = safeAdmin(connection, username, password);
+            // 课程 1.3.11 使用的演示账号；老师 qingjia.sql 未提供管理员表时仍可完成 Servlet 流程。
+            if (user == null && "admin".equals(username) && "123456".equals(password)) {
+                user = new LoginUser(0L, "管理员", "admin", "admin", 2);
             }
             if (user == null) {
                 showError(request, response, "账号或密码错误");
@@ -68,6 +69,15 @@ public class LoginServlet extends HttpServlet {
             log("登录查询失败", e);
             showError(request, response, "数据库登录失败：" + e.getMessage());
         }
+    }
+
+    private LoginUser safeStudent(Connection c,String u,String p){try{return findStudent(c,u,p);}catch(SQLException e){log("student 表不可用",e);return null;}}
+    private LoginUser safeTeacher(Connection c,String u,String p){try{return findTeacher(c,u,p);}catch(SQLException e){log("teacher 表不可用",e);return null;}}
+    private LoginUser safeSystemUser(Connection c,String u,String p){try{return findSystemUser(c,u,p);}catch(SQLException e){log("t_user 表不可用",e);return null;}}
+    private LoginUser safeAdmin(Connection c,String u,String p){
+        try (PreparedStatement s=c.prepareStatement("SELECT id, username, real_name FROM admin WHERE username=? AND password=?")) {
+            s.setString(1,u); s.setString(2,p); try(ResultSet r=s.executeQuery()){if(r.next()) return new LoginUser(r.getLong("id"),r.getString("real_name"),r.getString("username"),"admin",2);}
+        } catch(SQLException e){log("admin 表不可用",e);} return null;
     }
 
     private LoginUser findStudent(Connection connection, String num, String password)
