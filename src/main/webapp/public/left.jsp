@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     if (session.getAttribute("userId") == null) {
         response.sendRedirect(request.getContextPath() + "/login");
@@ -44,6 +45,22 @@
             <c:if test="${sessionScope.userType == 'student'}"><li><cite></cite><a href="<%= contextPath %>/leave" target="rightFrame">请假申请</a><i></i></li><li><cite></cite><a href="<%= contextPath %>/leave/list" target="rightFrame">我的申请</a><i></i></li></c:if>
             <c:if test="${sessionScope.userType == 'teacher' || sessionScope.userType == 'admin'}"><li><cite></cite><a href="<%= contextPath %>/approval" target="rightFrame">审批管理</a><i></i></li></c:if>
             <li><cite></cite><a href="#" target="rightFrame">用户管理</a><i></i></li>
+        </ul>
+    </dd>
+
+    <dd>
+        <div class="title"><span><img src="<%= contextPath %>/images/leftico02.png" alt="" /></span>第二章 HttpServletResponse</div>
+        <ul class="menuson">
+            <li><cite></cite><a href="<%= contextPath %>/chapter2/index.jsp" target="rightFrame">第二章示例总览</a><i></i></li>
+            <li><cite></cite><a href="<%= contextPath %>/SetResponseStatus" target="rightFrame">setStatus 状态码</a><i></i></li>
+            <li><cite></cite><a href="<%= contextPath %>/ResponseHeaderServlet" target="rightFrame">响应头与中文编码</a><i></i></li>
+            <li><cite></cite><a href="<%= contextPath %>/EncodingServlet" target="rightFrame">setCharacterEncoding 编码</a><i></i></li>
+            <li><cite></cite><a href="<%= contextPath %>/RefreshServlet" target="rightFrame">Refresh 定时刷新</a><i></i></li>
+            <li><cite></cite><a href="<%= contextPath %>/pages/file_download/download.jsp" target="rightFrame">文件下载</a><i></i></li>
+            <li><cite></cite><a href="<%= contextPath %>/FileServlet?option=1&pathType=1" target="rightFrame">文件管理系统</a><i></i></li>
+            <li><cite></cite><a href="<%= contextPath %>/IncludeServlet" target="rightFrame">include 包含</a><i></i></li>
+            <li><cite></cite><a href="<%= contextPath %>/IncludingServlet" target="rightFrame">forward 转发</a><i></i></li>
+            <li><cite></cite><a href="<%= contextPath %>/RedirectServlet" target="rightFrame">redirect 重定向</a><i></i></li>
         </ul>
     </dd>
 
