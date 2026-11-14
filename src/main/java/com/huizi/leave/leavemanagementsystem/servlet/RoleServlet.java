@@ -37,14 +37,12 @@ public class RoleServlet extends HttpServlet {
      */
     public RoleServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		int option = Integer.parseInt(request.getParameter("option"));
 		switch (option) {
 		case OPTION_QUERY:
@@ -52,7 +50,6 @@ public class RoleServlet extends HttpServlet {
 			try {
 				query(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -67,7 +64,6 @@ public class RoleServlet extends HttpServlet {
 			try {
 				doAdd(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -77,7 +73,6 @@ public class RoleServlet extends HttpServlet {
 			try {
 				update(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -87,7 +82,6 @@ public class RoleServlet extends HttpServlet {
 			try {
 				doUpdate(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -97,7 +91,6 @@ public class RoleServlet extends HttpServlet {
 			try {
 				delete(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -107,7 +100,6 @@ public class RoleServlet extends HttpServlet {
 			try {
 				authorize(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -117,14 +109,17 @@ public class RoleServlet extends HttpServlet {
 			try {
 				doAuthroize(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
 		}
 		case OPTION_DETIAL:
 		{
-			detail(request, response);
+			try {
+				detail(request, response);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			break;
 		}
 		
@@ -137,7 +132,6 @@ public class RoleServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 	private void query(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
@@ -235,7 +229,10 @@ public class RoleServlet extends HttpServlet {
 		
 		}
 	}
-	private void detail(HttpServletRequest request, HttpServletResponse response) {
-		
+	private void detail(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		Role role = RoleService.getInstance().getById(id);
+		request.setAttribute("role", role);
+		request.getRequestDispatcher("WEB-INF/jsp/role/detail.jsp").forward(request, response);
 	}
 }

@@ -23,7 +23,6 @@ public class JdbcUtil {
 				Class.forName(driver);
 				driverLoad = true;
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -41,7 +40,6 @@ public class JdbcUtil {
 			username = properties.getProperty("username");
 			password = properties.getProperty("password");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
@@ -69,7 +67,6 @@ public class JdbcUtil {
 		try {
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -81,7 +78,6 @@ public class JdbcUtil {
 		try {
 			sm.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -93,7 +89,6 @@ public class JdbcUtil {
 		try {
 			rs.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

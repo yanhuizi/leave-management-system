@@ -2,8 +2,6 @@ package com.huizi.leave.leavemanagementsystem.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -32,14 +30,12 @@ public class CollegeServlet extends HttpServlet {
      */
     public CollegeServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		int option = Integer.parseInt(request.getParameter("option"));
 		switch (option) {
 		case OPTION_QUERY:
@@ -47,7 +43,6 @@ public class CollegeServlet extends HttpServlet {
 			try {
 				query(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -62,7 +57,6 @@ public class CollegeServlet extends HttpServlet {
 			try {
 				doAdd(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -72,7 +66,6 @@ public class CollegeServlet extends HttpServlet {
 			try {
 				update(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -82,7 +75,6 @@ public class CollegeServlet extends HttpServlet {
 			try {
 				doUpdate(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -92,7 +84,6 @@ public class CollegeServlet extends HttpServlet {
 			try {
 				detail(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -105,21 +96,18 @@ public class CollegeServlet extends HttpServlet {
 	
 
 	private void query(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, SQLException {
-		// TODO Auto-generated method stub
 		List<College> colleges = CollegeSevice.getInstance().getAll();
 		request.setAttribute("colleges", colleges);
 		request.getRequestDispatcher("WEB-INF/jsp/colllege/list.jsp").forward(request, response);
 	}
 
 	private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		request.setAttribute("option", OPTION_DO_ADD);
 		
 		request.getRequestDispatcher("WEB-INF/jsp/colllege/add.jsp").forward(request, response);		
 	}
 
 	private void doAdd(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, SQLException {
-		// TODO Auto-generated method stub
 		College college = new College();
 		college.parse(request);
 		if (CollegeSevice.getInstance().add(college)) {
@@ -137,7 +125,6 @@ public class CollegeServlet extends HttpServlet {
 	}
 
 	private void update(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, SQLException {
-		// TODO Auto-generated method stub
 		String id = request.getParameter("id");
 		College college = CollegeSevice.getInstance().getById(id);
 		request.setAttribute("college", college);
@@ -147,7 +134,6 @@ public class CollegeServlet extends HttpServlet {
 	}
 
 	private void doUpdate(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, SQLException {
-		// TODO Auto-generated method stub
 		College college = new College();
 		college.parse(request);
 		if (CollegeSevice.getInstance().updateById(college)) {
@@ -165,7 +151,6 @@ public class CollegeServlet extends HttpServlet {
 	}
 
 	private void detail(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-		// TODO Auto-generated method stub
 		String id = request.getParameter("id");
 		College college = CollegeSevice.getInstance().getById(id);
 		request.setAttribute("college", college);
@@ -176,7 +161,6 @@ public class CollegeServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

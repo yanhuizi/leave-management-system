@@ -32,50 +32,39 @@ public class LeaveApplicationService {
 		return instance;
 	}
 	public int getTotalRocords(int type, int studentId) throws SQLException {
-		// TODO Auto-generated method stub
 		return LeaveApplicationDao.getInstance().getTotalRocords(type,studentId);
 	}
 	public List<LeaveApplicationView> getPage(int type, int studentId, Page page) throws SQLException {
-		// TODO Auto-generated method stub
 		return LeaveApplicationDao.getInstance().getPage(type,studentId,page);
 	}
 	public boolean add(LeaveApplication appply) throws SQLException {
-		// TODO Auto-generated method stub
 		return LeaveApplicationDao.getInstance().add(appply);
 	}
 	public LeaveApplication getById(int id) throws SQLException {
 		return LeaveApplicationDao.getInstance().getById(id);
 	}
 	public boolean update(LeaveApplication application) throws SQLException {
-		// TODO Auto-generated method stub
 		return LeaveApplicationDao.getInstance().update(application);
 	}
 	public LeaveApplicationView getDetailById(int id) throws SQLException {
-		// TODO Auto-generated method stub
 		return LeaveApplicationDao.getInstance().getDetailById(id);
 	}
 	public List<LeaveApplicationShenPiView> getShenpiesById(int id) throws SQLException {
-		// TODO Auto-generated method stub
 		return LeaveApplicationDao.getInstance().getShenpiesById(id);
 	}
 	public int getBanzhurenShenPiTotalRocords(int statusDaiShenPi, String manageClasses) throws SQLException {
-		// TODO Auto-generated method stub
 		return LeaveApplicationDao.getInstance().getBanzhurenShenPiTotalRocords(statusDaiShenPi, manageClasses);
 	}
 	public List<LeaveApplicationView> getBanzhurenShenPiPage(int statusDaiShenPi, String manageClasses, Page page) throws SQLException {
-		// TODO Auto-generated method stub
 		return LeaveApplicationDao.getInstance().getBanzhurenShenPiPage(statusDaiShenPi, manageClasses, page);
 	}
 	public int getYuanShenPiTotalRocords(int statusBanzhrenPass, int collegeId) throws SQLException {
-		// TODO Auto-generated method stub
 		return LeaveApplicationDao.getInstance().getYuanShenPiTotalRocords(statusBanzhrenPass, collegeId);
 	}
 	public List<LeaveApplicationView> getYuanShenPiPage(int statusBanzhrenPass, int collegeId, Page page) throws SQLException {
-		// TODO Auto-generated method stub
 		return LeaveApplicationDao.getInstance().getYuanShenPiPage(statusBanzhrenPass, collegeId, page);
 	}
 	public boolean shenpi(LeaveApplication application, LeaveApplicationShenPi shenPi) throws SQLException {
-		// TODO Auto-generated method stub
 		shenPi.setApplicationId(application.getId());
 		if (shenPi.getResult() == LeaveApplicationShenPi.RESULT_TYPE_AGREE) {
 			switch (application.getType()) {
@@ -109,8 +98,15 @@ public class LeaveApplicationService {
 				break;
 			}
 		}else{
-			application.setStatus(LeaveApplication.STATUS_OVER);
+			application.setStatus(LeaveApplication.STATUS_NOT_PASS);
 		}
 		return LeaveApplicationDao.getInstance().shenpi(application, shenPi);
+	}
+
+	/**
+	 * 销假：把审批通过的申请置为“结束”。
+	 */
+	public boolean over(int id) throws SQLException {
+		return LeaveApplicationDao.getInstance().over(id);
 	}
 }

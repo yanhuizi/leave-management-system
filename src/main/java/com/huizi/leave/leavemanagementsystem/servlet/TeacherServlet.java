@@ -11,14 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.huizi.leave.leavemanagementsystem.domain.Clazz;
 import com.huizi.leave.leavemanagementsystem.domain.College;
-import com.huizi.leave.leavemanagementsystem.domain.Grade;
 import com.huizi.leave.leavemanagementsystem.domain.Role;
-import com.huizi.leave.leavemanagementsystem.domain.Student;
 import com.huizi.leave.leavemanagementsystem.domain.Teacher;
 import com.huizi.leave.leavemanagementsystem.page.Page;
-import com.huizi.leave.leavemanagementsystem.service.ClassService;
 import com.huizi.leave.leavemanagementsystem.service.CollegeSevice;
 import com.huizi.leave.leavemanagementsystem.service.RoleService;
 import com.huizi.leave.leavemanagementsystem.service.TeacherService;
@@ -46,14 +42,12 @@ public class TeacherServlet extends HttpServlet {
      */
     public TeacherServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		int option = Integer.parseInt(request.getParameter("option"));
 		HttpSession session = request.getSession();
 		QingjiaSesssion qingjiaSesssion = (QingjiaSesssion)session.getAttribute("qSession");
@@ -67,7 +61,6 @@ public class TeacherServlet extends HttpServlet {
 			try {
 				query(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -77,7 +70,6 @@ public class TeacherServlet extends HttpServlet {
 			try {
 				add(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -87,7 +79,6 @@ public class TeacherServlet extends HttpServlet {
 			try {
 				doAdd(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -97,7 +88,6 @@ public class TeacherServlet extends HttpServlet {
 			try {
 				update(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -107,7 +97,6 @@ public class TeacherServlet extends HttpServlet {
 			try {
 				doUpdate(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -117,7 +106,6 @@ public class TeacherServlet extends HttpServlet {
 			try {
 				detail(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -127,7 +115,6 @@ public class TeacherServlet extends HttpServlet {
 			try {
 				role(request,response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -137,7 +124,6 @@ public class TeacherServlet extends HttpServlet {
 			try {
 				doRole(request,response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -147,7 +133,6 @@ public class TeacherServlet extends HttpServlet {
 			try {
 				ResetPassword(request,response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -159,7 +144,6 @@ public class TeacherServlet extends HttpServlet {
 
 
 	private void query(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, SQLException {
-		// TODO Auto-generated method stub
 		//获取查询条件
 		Teacher teacher = new Teacher();
 		teacher.parse(request);
@@ -188,7 +172,6 @@ public class TeacherServlet extends HttpServlet {
 	}
 
 	private void add(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-		// TODO Auto-generated method stub
 		request.setAttribute("option", OPTION_DO_ADD);
 		List<College> colleges = CollegeSevice.getInstance().getAll();		
 		request.setAttribute("colleges",colleges);
@@ -196,7 +179,6 @@ public class TeacherServlet extends HttpServlet {
 	}
 	
 	private void doAdd(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, SQLException {
-		// TODO Auto-generated method stub
 		Teacher teacher = new Teacher();
 		teacher.parse(request);
 		teacher.setPassword(teacher.getNum());
@@ -208,7 +190,6 @@ public class TeacherServlet extends HttpServlet {
 	}
 	
 	private void update(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, SQLException {
-		// TODO Auto-generated method stub
 		//查询要修改的教师信息
 		int id = Integer.parseInt(request.getParameter("id"));
 		Teacher teacher = TeacherService.getInstance().getById(id);
@@ -222,7 +203,6 @@ public class TeacherServlet extends HttpServlet {
 	}
 
 	private void doUpdate(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, SQLException {
-		// TODO Auto-generated method stub
 		Teacher teacher = new Teacher();
 		teacher.parse(request);
 		if (TeacherService.getInstance().update(teacher)) {
@@ -232,7 +212,6 @@ public class TeacherServlet extends HttpServlet {
 		}
 	}
 	private void detail(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, SQLException {
-		// TODO Auto-generated method stub
 		int id = Integer.parseInt(request.getParameter("id"));
 		Teacher teacher = TeacherService.getInstance().getById(id);
 		request.setAttribute("teacher", teacher);
@@ -240,7 +219,6 @@ public class TeacherServlet extends HttpServlet {
 	}
 
 	private void role(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, SQLException {
-		// TODO Auto-generated method stub
 		int id = Integer.parseInt(request.getParameter("id"));
 		request.setAttribute("id", id);
 		List<Role> roles = RoleService.getInstance().getAll();
@@ -252,7 +230,6 @@ public class TeacherServlet extends HttpServlet {
 	}
 
 	private void doRole(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, SQLException {
-		// TODO Auto-generated method stub
 		int id = Integer.parseInt(request.getParameter("id"));
 		String[] permissiones = request.getParameterValues("pemission");
 		if (TeacherService.getInstance().updateRoles(id,permissiones)) {
@@ -263,7 +240,6 @@ public class TeacherServlet extends HttpServlet {
 	}
 	
 	private void ResetPassword(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-		// TODO Auto-generated method stub
 		int id = Integer.parseInt(request.getParameter("id"));
 		if (TeacherService.getInstance().ResetPassword(id)) {
 			MessageUtil.showMessage("重置教师密码", "修改成功",  "TeacherServlet?option=1&pageNo=1", request, response);						
@@ -276,7 +252,6 @@ public class TeacherServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

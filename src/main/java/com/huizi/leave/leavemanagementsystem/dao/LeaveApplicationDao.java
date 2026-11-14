@@ -1,7 +1,6 @@
 package com.huizi.leave.leavemanagementsystem.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +11,6 @@ import com.huizi.leave.leavemanagementsystem.domain.LeaveApplication;
 import com.huizi.leave.leavemanagementsystem.domain.LeaveApplicationShenPi;
 import com.huizi.leave.leavemanagementsystem.domain.LeaveApplicationShenPiView;
 import com.huizi.leave.leavemanagementsystem.domain.LeaveApplicationView;
-import com.huizi.leave.leavemanagementsystem.domain.LeaveApplication;
 import com.huizi.leave.leavemanagementsystem.page.Page;
 import com.huizi.leave.leavemanagementsystem.util.DateUtil;
 import com.huizi.leave.leavemanagementsystem.util.JdbcUtil;
@@ -27,24 +25,15 @@ public class LeaveApplicationDao {
 		return instance;
 	}
 	public int getTotalRocords(int type, int studentId) throws SQLException {
-		// TODO Auto-generated method stub
 		int totalRecordes = 0;
 		Connection conn = JdbcUtil.getConnect();
 		StringBuilder builder = new StringBuilder();
 		String sql = "";
-		if (type == 1) {
-			builder.append("select count(*) as count from leave_application WHERE studentId = ? AND status < ? ");
-		}else{
-			builder.append("select count(*) as count from leave_application WHERE studentId = ? AND status = ? ");
-		}
+		builder.append("select count(*) as count from leave_application WHERE studentId = ? ");
+		builder.append(getStatusCondition(type));
 		sql = builder.toString();
 		PreparedStatement psm = JdbcUtil.getPreparedStatement(conn, sql);
 		psm.setInt(1, studentId);
-		if (type != 3) {
-			psm.setInt(2, 4);
-		}else {
-			psm.setInt(2, 5);
-		}
 		ResultSet set = psm.executeQuery();
 		
 		if (set.next()) {
@@ -53,29 +42,36 @@ public class LeaveApplicationDao {
 		JdbcUtil.closeConnectionStateMent(conn, psm);
 		return totalRecordes;
 	}
+
+	/**
+	 * 申请状态筛选条件：0 全部，1 审批中，2 审批通过，3 结束（未通过或已销假）。
+	 */
+	private String getStatusCondition(int type) {
+		switch (type) {
+		case 0:
+			return "";
+		case 2:
+			return " AND status = " + LeaveApplication.STATUS_PASS;
+		case 3:
+			return " AND status >= " + LeaveApplication.STATUS_NOT_PASS;
+		default:
+			return " AND status < " + LeaveApplication.STATUS_PASS;
+		}
+	}
+
 	public List<LeaveApplicationView> getPage(int type, int studentId, Page page) throws SQLException {
-		// TODO Auto-generated method stub
 		List<LeaveApplicationView> applications = new ArrayList<LeaveApplicationView>();
 		Connection conn = JdbcUtil.getConnect();
 		StringBuilder builder = new StringBuilder();
 		String sql = "";
-		if (type == 1) {
-			builder.append("select *  from leave_application_view WHERE studentId = ? AND status < ? ");
-		}else{
-			builder.append("select *  from leave_application_view WHERE studentId = ? AND status = ? ");
-		}
+		builder.append("select *  from leave_application_view WHERE studentId = ? ");
+		builder.append(getStatusCondition(type));
 		builder.append(" ORDER BY id DESC  ");
 		builder.append(" limit " + ((page.getPageNo()-1)*page.getPageSize()+ "," +page.getPageSize()));
 		sql = builder.toString();
 		PreparedStatement psm = JdbcUtil.getPreparedStatement(conn, sql);
 		psm.setInt(1, studentId);
-		if (type != 3) {
-			psm.setInt(2, 4);
-		}else {
-			psm.setInt(2, 5);
-		}
 		ResultSet set = psm.executeQuery();
-		LeaveApplicationView apllicaton;
 		while (set.next()) {
 			getFromSet(applications, set);
 		}
@@ -100,7 +96,6 @@ public class LeaveApplicationDao {
 		applications.add(apllicaton);
 	}
 	public boolean add(LeaveApplication appply) throws SQLException {
-		// TODO Auto-generated method stub
 		Connection conn = JdbcUtil.getConnect();
 		String sql = "INSERT INTO leave_application(studentId,type,path,reason,begintime,endtime,status) VALUES (?,?,?,?,?,?,?)";
 		PreparedStatement psm = JdbcUtil.getPreparedStatement(conn, sql);
@@ -116,7 +111,6 @@ public class LeaveApplicationDao {
 		return count==1;
 	}
 	public LeaveApplication getById(int id) throws SQLException {
-		// TODO Auto-generated method stub
 		LeaveApplication application = new LeaveApplication();
 		Connection conn = JdbcUtil.getConnect();
 		
@@ -141,7 +135,6 @@ public class LeaveApplicationDao {
 		return application;
 	}
 	public boolean update(LeaveApplication application) throws SQLException {
-		// TODO Auto-generated method stub
 		Connection conn = JdbcUtil.getConnect();
 		String sql = "UPDATE leave_application SET type=?,path=?,reason=?,begintime=?,endtime=? WHERE id=?";
 		PreparedStatement psm = JdbcUtil.getPreparedStatement(conn, sql);	
@@ -156,7 +149,6 @@ public class LeaveApplicationDao {
 		return count==1;
 	}
 	public LeaveApplicationView getDetailById(int id) throws SQLException {
-		// TODO Auto-generated method stub
 		LeaveApplicationView application = new LeaveApplicationView();
 		Connection conn = JdbcUtil.getConnect();
 		
@@ -185,7 +177,6 @@ public class LeaveApplicationDao {
 		return application;
 	}
 	public List<LeaveApplicationShenPiView> getShenpiesById(int id) throws SQLException {
-		// TODO Auto-generated method stub
 		List<LeaveApplicationShenPiView> shenpies = new ArrayList<LeaveApplicationShenPiView>();
 		Connection conn = JdbcUtil.getConnect();
 		String sql = "select *  from leave_application_shen_pi_view WHERE applicationId = ?";
@@ -208,7 +199,6 @@ public class LeaveApplicationDao {
 		return shenpies;
 	}
 	public int getBanzhurenShenPiTotalRocords(int statusDaiShenPi, String manageClasses) throws SQLException {
-		// TODO Auto-generated method stub
 		int totalRecordes = 0;
 		Connection conn = JdbcUtil.getConnect();
 		String sql = "select count(*) as count from leave_application_view WHERE status = ? AND classId in (?) ";
@@ -224,7 +214,6 @@ public class LeaveApplicationDao {
 		return totalRecordes;
 	}
 	public List<LeaveApplicationView> getBanzhurenShenPiPage(int statusDaiShenPi, String manageClasses, Page page) throws SQLException {
-		// TODO Auto-generated method stub
 		List<LeaveApplicationView> applications = new ArrayList<LeaveApplicationView>();
 		Connection conn = JdbcUtil.getConnect();
 		StringBuilder builder = new StringBuilder("select * from leave_application_view WHERE status = ? AND classId in (?) ");
@@ -244,7 +233,6 @@ public class LeaveApplicationDao {
 		return applications;
 	}
 	public int getYuanShenPiTotalRocords(int statusBanzhrenPass, int collegeId) throws SQLException {
-		// TODO Auto-generated method stub
 		int totalRecordes = 0;
 		Connection conn = JdbcUtil.getConnect();
 		String sql = "select count(*) as count from leave_application_view WHERE status = ? AND belongToCollegeId = ? ";
@@ -260,7 +248,6 @@ public class LeaveApplicationDao {
 		return totalRecordes;
 	}
 	public List<LeaveApplicationView> getYuanShenPiPage(int statusBanzhrenPass, int collegeId, Page page) throws SQLException {
-		// TODO Auto-generated method stub
 		List<LeaveApplicationView> applications = new ArrayList<LeaveApplicationView>();
 		Connection conn = JdbcUtil.getConnect();
 		StringBuilder builder = new StringBuilder("select * from leave_application_view WHERE status = ? AND belongToCollegeId = ? ");
@@ -280,7 +267,6 @@ public class LeaveApplicationDao {
 		return applications;
 	}
 	public boolean shenpi(LeaveApplication application, LeaveApplicationShenPi shenPi) throws SQLException {
-		// TODO Auto-generated method stub
 		boolean result = true;
 		Connection conn = JdbcUtil.getConnect();
 		conn.setAutoCommit(false);
@@ -312,6 +298,21 @@ public class LeaveApplicationDao {
 		}
 		JdbcUtil.closeConnectionStateMent(conn, psm);
 		return result;
+	}
+
+	/**
+	 * 销假：只有“审批通过”的申请才能置为“结束”。
+	 */
+	public boolean over(int id) throws SQLException {
+		Connection conn = JdbcUtil.getConnect();
+		String sql = "UPDATE leave_application SET status=? WHERE id=? AND status=?";
+		PreparedStatement psm = JdbcUtil.getPreparedStatement(conn, sql);
+		psm.setInt(1, LeaveApplication.STATUS_OVER);
+		psm.setInt(2, id);
+		psm.setInt(3, LeaveApplication.STATUS_PASS);
+		int count = psm.executeUpdate();
+		JdbcUtil.closeConnectionStateMent(conn, psm);
+		return count == 1;
 	}
 	
 	

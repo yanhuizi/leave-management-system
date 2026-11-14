@@ -10,7 +10,6 @@ import java.util.List;
 
 import com.huizi.leave.leavemanagementsystem.domain.Clazz;
 import com.huizi.leave.leavemanagementsystem.domain.Grade;
-import com.huizi.leave.leavemanagementsystem.domain.Role;
 import com.huizi.leave.leavemanagementsystem.page.Page;
 import com.huizi.leave.leavemanagementsystem.util.JdbcUtil;
 
@@ -45,7 +44,6 @@ public class ClassDao {
 	}
 
 	public List<Clazz> getAll(Clazz clazzCondition,String whereClause,Page page) throws SQLException {
-		// TODO Auto-generated method stub
 		List<Clazz> clazzs = new ArrayList<Clazz>();
 		Connection conn = JdbcUtil.getConnect();
 		String sql;
@@ -95,7 +93,6 @@ public class ClassDao {
 	}
 
 	public List<Grade> getGrade() throws SQLException {
-		// TODO Auto-generated method stub
 		List<Grade> grades = new ArrayList<Grade>();
 		Connection conn = JdbcUtil.getConnect();
 		String sql = "SELECT * FROM grade ORDER BY id DESC";
@@ -113,7 +110,6 @@ public class ClassDao {
 	}
 
 	public boolean add(Clazz clazz) throws SQLException {
-		// TODO Auto-generated method stub
 		Connection conn = JdbcUtil.getConnect();
 		String sql = "INSERT INTO class(num,gradeId,belongToCollegeId) VALUES (?,?,?)";
 		PreparedStatement psm = JdbcUtil.getPreparedStatement(conn, sql);
@@ -126,7 +122,6 @@ public class ClassDao {
 	}
 
 	public Clazz getById(int id) throws SQLException {
-		// TODO Auto-generated method stub
 		Clazz clazz = null;
 		Connection conn = JdbcUtil.getConnect();
 		
@@ -147,7 +142,6 @@ public class ClassDao {
 	}
 
 	public boolean update(Clazz clazz) throws SQLException {
-		// TODO Auto-generated method stub
 		Connection conn = JdbcUtil.getConnect();
 		String sql = "UPDATE class SET num = ?,gradeId = ?,belongToCollegeId = ? WHERE id = ?";
 		PreparedStatement psm = JdbcUtil.getPreparedStatement(conn, sql);
@@ -161,7 +155,6 @@ public class ClassDao {
 	}
 
 	public Clazz getDetailById(int id) throws SQLException {
-		// TODO Auto-generated method stub
 		Clazz clazz = null;
 		Connection conn = JdbcUtil.getConnect();
 		
@@ -190,7 +183,6 @@ public class ClassDao {
 	}
 
 	public boolean setClassBanzhuren(int classid, int teacherid) throws SQLException {
-		// TODO Auto-generated method stub
 		Connection conn = JdbcUtil.getConnect();
 		String sql = "UPDATE class SET banZhuRenId = ? WHERE id = ?";
 		PreparedStatement psm = JdbcUtil.getPreparedStatement(conn, sql);
@@ -202,7 +194,6 @@ public class ClassDao {
 	}
 
 	public int getTotalRecord(Clazz clazzCondition, String whereClause) throws SQLException {
-		// TODO Auto-generated method stub
 		
 		Connection conn = JdbcUtil.getConnect();
 		String sql;
@@ -252,7 +243,6 @@ public class ClassDao {
 	}
 
 	public List<Grade> getGradesByIds(String strGrades) throws SQLException {
-		// TODO Auto-generated method stub
 		List<Grade> grades = new ArrayList<Grade>();
 		Connection conn = JdbcUtil.getConnect();
 		
@@ -272,7 +262,6 @@ public class ClassDao {
 	}
 
 	public List<Clazz> getByCollegeAndGrade(int college, int grade) throws SQLException {
-		// TODO Auto-generated method stub
 		List<Clazz> clazzs = new ArrayList<>();
 		Connection conn = JdbcUtil.getConnect();
 		PreparedStatement psm;

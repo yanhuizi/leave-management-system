@@ -12,7 +12,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>无标题文档</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
-<script language="JavaScript" src="js/jquery.js"></script>
+<script src="js/jquery.js"></script>
 
 <script type="text/javascript">
 $(function(){	
@@ -95,10 +95,11 @@ $(function(){
     
     <dd><div class="title"><span><img src="images/leftico04.png" /></span>日期管理</div>
     <ul class="menuson">
-        <li><cite></cite><a href="#">自定义</a><i></i></li>
-        <li><cite></cite><a href="#">常用资料</a><i></i></li>
-        <li><cite></cite><a href="#">信息列表</a><i></i></li>
-        <li><cite></cite><a href="#">其他</a><i></i></li>
+        <!-- 后台模板自带的演示菜单，本系统没有对应模块，点击不跳转，仅作界面占位。 -->
+        <li><cite></cite><a href="javascript:void(0);" title="模板占位菜单，本系统无此功能">自定义</a><i></i></li>
+        <li><cite></cite><a href="javascript:void(0);" title="模板占位菜单，本系统无此功能">常用资料</a><i></i></li>
+        <li><cite></cite><a href="javascript:void(0);" title="模板占位菜单，本系统无此功能">信息列表</a><i></i></li>
+        <li><cite></cite><a href="javascript:void(0);" title="模板占位菜单，本系统无此功能">其他</a><i></i></li>
     </ul>
     
     </dd>   

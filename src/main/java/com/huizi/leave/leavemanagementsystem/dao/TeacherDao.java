@@ -43,7 +43,6 @@ public class TeacherDao {
 	}
 
 	public List<Teacher> getByName(String name) throws SQLException {
-		// TODO Auto-generated method stub
 		List<Teacher> teacheres = new ArrayList<Teacher>();
 		Connection conn = JdbcUtil.getConnect();
 		String sql = "select * from teacher_view where name like ?";
@@ -72,7 +71,6 @@ public class TeacherDao {
 	}
 
 	public int getTotalRecordes(Teacher teacher) throws SQLException {
-		// TODO Auto-generated method stub
 		int totalRecordes = 0;
 		Connection conn = JdbcUtil.getConnect();
 		StringBuilder builder = new StringBuilder();
@@ -111,7 +109,6 @@ public class TeacherDao {
 	}
 
 	public List<Teacher> getAll(Teacher teacher, Page page) throws SQLException {
-		// TODO Auto-generated method stub
 		List<Teacher> teachers = new ArrayList<Teacher>();
 		Connection conn = JdbcUtil.getConnect();
 		StringBuilder builder = new StringBuilder();
@@ -166,7 +163,6 @@ public class TeacherDao {
 	}
 
 	public boolean add(Teacher teacher) throws SQLException {
-		// TODO Auto-generated method stub
 		Connection conn = JdbcUtil.getConnect();
 		String sql = "INSERT INTO teacher(name,num,password,collegeId,phone) VALUES (?,?,?,?,?)";
 		PreparedStatement psm = JdbcUtil.getPreparedStatement(conn, sql);
@@ -182,7 +178,6 @@ public class TeacherDao {
 	}
 
 	public Teacher getById(int id) throws SQLException {
-		// TODO Auto-generated method stub
 		Connection conn = JdbcUtil.getConnect();
 		String sql = "select * from teacher_view where id = ?";
 		PreparedStatement psm = JdbcUtil.getPreparedStatement(conn, sql);
@@ -197,7 +192,6 @@ public class TeacherDao {
 	}
 
 	public boolean update(Teacher teacher) throws SQLException {
-		// TODO Auto-generated method stub
 		Connection conn = JdbcUtil.getConnect();
 		String sql = "UPDATE teacher SET name = ?,num = ?,collegeId = ?,phone = ? WHERE id = ?";
 		PreparedStatement psm = JdbcUtil.getPreparedStatement(conn, sql);
@@ -212,7 +206,6 @@ public class TeacherDao {
 	}
 
 	public boolean updateRoles(int id, String[] permissiones) throws SQLException {
-		// TODO Auto-generated method stub
 		Connection conn = JdbcUtil.getConnect();
 		PreparedStatement psm;
 		//开启mysql的事务
@@ -233,7 +226,6 @@ public class TeacherDao {
 			}
 			conn.commit();
 		} catch (Exception e) {
-			// TODO: handle exception
 			conn.rollback();
 			return false;
 		}
@@ -242,7 +234,6 @@ public class TeacherDao {
 	}
 
 	public boolean ResetPassword(int id) throws SQLException {
-		// TODO Auto-generated method stub
 		Connection conn = JdbcUtil.getConnect();
 		String sql = "UPDATE teacher SET password = num WHERE id = ?";
 		PreparedStatement psm = JdbcUtil.getPreparedStatement(conn, sql);

@@ -9,7 +9,6 @@ import java.util.List;
 
 
 import com.huizi.leave.leavemanagementsystem.domain.Role;
-import com.huizi.leave.leavemanagementsystem.service.PermissionService;
 import com.huizi.leave.leavemanagementsystem.util.JdbcUtil;
 
 public class RoleDao {
@@ -90,7 +89,6 @@ public class RoleDao {
 	}
 
 	public Role getById(int id) throws SQLException {
-		// TODO Auto-generated method stub
 		Role role = new Role();
 		Connection conn = JdbcUtil.getConnect();
 		
@@ -113,7 +111,6 @@ public class RoleDao {
 	}
 
 	public boolean deleteById(int id) throws SQLException {
-		// TODO Auto-generated method stub
 		Connection conn = JdbcUtil.getConnect();
 		
 		String sql = "DELETE  FROM role WHERE id = ?";
@@ -145,7 +142,6 @@ public class RoleDao {
 			}
 			conn.commit();
 		} catch (Exception e) {
-			// TODO: handle exception
 			conn.rollback();
 			return false;
 		}

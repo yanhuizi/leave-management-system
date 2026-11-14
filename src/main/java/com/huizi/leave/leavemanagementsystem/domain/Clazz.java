@@ -65,7 +65,6 @@ public class Clazz {
 		this.belongToCollege = belongToCollege;
 	}
 	public void parse(HttpServletRequest request) {
-		// TODO Auto-generated method stub
 		String strId = request.getParameter("id");
 		if (strId != null) {
 			id = Integer.parseInt(strId);

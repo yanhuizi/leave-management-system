@@ -19,7 +19,7 @@
 	<div class="place">
     <span>位置：</span>
     <ul class="placeul">
-    <li><a href="#">首页</a></li>
+    <li><a href="public/index.jsp">首页</a></li>
     <li><a href="RoleServlet?option=1">角色</a></li>
     <li><a href="RoleServlet?option=2">添加角色</a></li>
     </ul>

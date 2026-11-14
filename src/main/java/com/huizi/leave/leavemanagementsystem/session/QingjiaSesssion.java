@@ -85,7 +85,6 @@ public class QingjiaSesssion {
 	private int dataArea = DATA_AREA_PERSON;
 	
 	public QingjiaSesssion() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public boolean hasPermission(String permission) {

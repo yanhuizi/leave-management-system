@@ -48,9 +48,9 @@ function formSubmit(){
 	<div class="place">
     <span>位置：</span>
     <ul class="placeul">
-    <li><a href="#">首页</a></li>
-    <li><a href="#">数据表</a></li>
-    <li><a href="#">基本内容</a></li>
+    <li><a href="public/index.jsp">首页</a></li>
+    <li><a href="javascript:void(0);">数据表</a></li>
+    <li><a href="javascript:void(0);">基本内容</a></li>
     </ul>
     </div>
     
@@ -108,8 +108,8 @@ function formSubmit(){
         </div>
         
         <div class="tipbtn">
-        <input name="" type="button"  class="sure" value="确定" />&nbsp;
-        <input name="" type="button"  class="cancel" value="取消" />
+        <input type="button"  class="sure" value="确定" />&nbsp;
+        <input type="button"  class="cancel" value="取消" />
         </div>
     
     </div>

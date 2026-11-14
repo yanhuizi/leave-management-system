@@ -33,12 +33,10 @@ public class RoleService {
 	}
 
 	public Role getById(int id) throws SQLException {
-		// TODO Auto-generated method stub
 		return RoleDao.getInstance().getById(id);
 	}
 
 	public boolean deleteById(int id) throws SQLException {
-		// TODO Auto-generated method stub
 		return RoleDao.getInstance().deleteById(id);
 	}
 	

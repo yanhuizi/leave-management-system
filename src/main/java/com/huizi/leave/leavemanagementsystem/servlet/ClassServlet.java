@@ -50,14 +50,12 @@ public class ClassServlet extends HttpServlet {
      */
     public ClassServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		int option = Integer.parseInt(request.getParameter("option"));
 		HttpSession session = request.getSession();
 		QingjiaSesssion qingjiaSesssion = (QingjiaSesssion)session.getAttribute("qSession");
@@ -71,7 +69,6 @@ public class ClassServlet extends HttpServlet {
 			try {
 				query(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -81,7 +78,6 @@ public class ClassServlet extends HttpServlet {
 			try {
 				add(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -91,7 +87,6 @@ public class ClassServlet extends HttpServlet {
 			try {
 				doAdd(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -101,7 +96,6 @@ public class ClassServlet extends HttpServlet {
 			try {
 				update(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -111,7 +105,6 @@ public class ClassServlet extends HttpServlet {
 			try {
 				doUpdate(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -121,14 +114,17 @@ public class ClassServlet extends HttpServlet {
 			try {
 				detail(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
 		}
 		case OPTION_BANZHUREN:
 		{
-			banzhuren(request,response);
+			try {
+				banzhuren(request,response);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			break;
 		}
 		case OPTION_QUERY_BANZHUREN:
@@ -136,7 +132,6 @@ public class ClassServlet extends HttpServlet {
 			try {
 				queryBanzhuren(request,response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -145,7 +140,6 @@ public class ClassServlet extends HttpServlet {
 			try {
 				doBanzhuren(request,response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -154,7 +148,6 @@ public class ClassServlet extends HttpServlet {
 			try {
 				ajaxClasses(request,response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -165,7 +158,6 @@ public class ClassServlet extends HttpServlet {
 	}
 	//ajax获取班级
 	private void ajaxClasses(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-		// TODO Auto-generated method stub
 		String college = request.getParameter("college");
 		String grade   = request.getParameter("grade");
 		int collegeId = 0;
@@ -192,7 +184,6 @@ public class ClassServlet extends HttpServlet {
 	}
 
 	private void queryBanzhuren(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-		// TODO Auto-generated method stub
 		int id = Integer.parseInt(request.getParameter("id"));
 		String name = request.getParameter("teacher");
 		List<Teacher> teachers = TeacherService.getInstance().getByName(name);
@@ -202,16 +193,16 @@ public class ClassServlet extends HttpServlet {
 		request.getRequestDispatcher("WEB-INF/jsp/class/banzhuren.jsp").forward(request, response);
 	}
 
-	private void banzhuren(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	private void banzhuren(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		request.setAttribute("id", id);
 		request.setAttribute("name", "");
+		//进入页面时先列出全部教师，再按姓名查询（16.7.6）。
+		request.setAttribute("teachers", TeacherService.getInstance().getByName(""));
 		request.getRequestDispatcher("WEB-INF/jsp/class/banzhuren.jsp").forward(request, response);
 	}
 	
 	private void doBanzhuren(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
-		// TODO Auto-generated method stub
 		int classid = Integer.parseInt(request.getParameter("classid"));
 		int teacherid = Integer.parseInt(request.getParameter("teacherid"));
 		if(ClassService.getInstance().setClassBanzhuren(classid,teacherid))
@@ -235,7 +226,6 @@ public class ClassServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 	private void query(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
@@ -271,7 +261,6 @@ public class ClassServlet extends HttpServlet {
 		}
 	}
 	private String getWhereClause(HttpServletRequest request) {
-		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		QingjiaSesssion qSesssion = (QingjiaSesssion) session.getAttribute("qSession");
 		int dataArea = qSesssion.getDataArea();

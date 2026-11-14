@@ -60,14 +60,12 @@ public class LeaveApplicationServlet extends HttpServlet {
      */
     public LeaveApplicationServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		int option = Integer.parseInt(request.getParameter("option"));
 		HttpSession session = request.getSession();
 		QingjiaSesssion qingjiaSesssion = (QingjiaSesssion)session.getAttribute("qSession");
@@ -82,7 +80,6 @@ public class LeaveApplicationServlet extends HttpServlet {
 				request.setAttribute("option", option);
 				query(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -92,7 +89,6 @@ public class LeaveApplicationServlet extends HttpServlet {
 			try {
 				add(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -103,11 +99,9 @@ public class LeaveApplicationServlet extends HttpServlet {
 				try {
 					doAdd(request, response);
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -117,7 +111,6 @@ public class LeaveApplicationServlet extends HttpServlet {
 			try {
 				update(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -128,11 +121,9 @@ public class LeaveApplicationServlet extends HttpServlet {
 				try {
 					doUpdate(request, response);
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -142,7 +133,6 @@ public class LeaveApplicationServlet extends HttpServlet {
 			try {
 				detail(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -152,7 +142,6 @@ public class LeaveApplicationServlet extends HttpServlet {
 			try {
 				over(request,response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -162,7 +151,6 @@ public class LeaveApplicationServlet extends HttpServlet {
 			try {
 				doOver(request,response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -172,7 +160,6 @@ public class LeaveApplicationServlet extends HttpServlet {
 			try {
 				shenpiList(request,response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -181,7 +168,6 @@ public class LeaveApplicationServlet extends HttpServlet {
 			try {
 				shenpi(request,response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -193,11 +179,9 @@ public class LeaveApplicationServlet extends HttpServlet {
 				try {
 					doShenpi(request,response);
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -207,7 +191,6 @@ public class LeaveApplicationServlet extends HttpServlet {
 		}
 	}
 	private void query(HttpServletRequest request, HttpServletResponse response)throws SQLException, ServletException, IOException  {
-		// TODO Auto-generated method stub
 		//1、获取查询条件
 		int type = Integer.parseInt((String) request.getParameter("type"));
 		request.setAttribute("type", type);
@@ -232,7 +215,6 @@ public class LeaveApplicationServlet extends HttpServlet {
 	}
 
 	private void add(HttpServletRequest request, HttpServletResponse response)throws SQLException, ServletException, IOException  {
-		// TODO Auto-generated method stub
 		Date date = new Date();
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String now = format.format(date).replace(' ', 'T');
@@ -242,7 +224,6 @@ public class LeaveApplicationServlet extends HttpServlet {
 	}
 
 	private void doAdd(HttpServletRequest request, HttpServletResponse response)throws SQLException, ServletException, IOException, ParseException  {
-		// TODO Auto-generated method stub
 		LeaveApplication appply = new LeaveApplication();
 		appply.parse(request);
 		HttpSession session = request.getSession();
@@ -259,7 +240,6 @@ public class LeaveApplicationServlet extends HttpServlet {
 	}
 
 	private void update(HttpServletRequest request, HttpServletResponse response)throws SQLException, ServletException, IOException  {
-		// TODO Auto-generated method stub
 		int id = Integer.parseInt(request.getParameter("id"));
 		LeaveApplication application = LeaveApplicationService.getInstance().getById(id);
 		application.setH5Begintime(DateUtil.dateToH5String(application.getBegintime()));
@@ -271,7 +251,6 @@ public class LeaveApplicationServlet extends HttpServlet {
 	}
 
 	private void doUpdate(HttpServletRequest request, HttpServletResponse response)throws SQLException, ServletException, IOException, ParseException  {
-		// TODO Auto-generated method stub
 		LeaveApplication application = new LeaveApplication();
 		application.parse(request);
 		if (LeaveApplicationService.getInstance().update(application)) {
@@ -283,7 +262,6 @@ public class LeaveApplicationServlet extends HttpServlet {
 	}
 
 	private void detail(HttpServletRequest request, HttpServletResponse response)throws SQLException, ServletException, IOException  {
-		// TODO Auto-generated method stub
 		//获取基本信息
 		int id = Integer.parseInt(request.getParameter("id"));
 		LeaveApplicationView application = LeaveApplicationService.getInstance().getDetailById(id);
@@ -295,7 +273,6 @@ public class LeaveApplicationServlet extends HttpServlet {
 		request.getRequestDispatcher("WEB-INF/jsp/apply/detail.jsp").forward(request, response);
 	}
 	private void shenpiList(HttpServletRequest request, HttpServletResponse response)throws SQLException, ServletException, IOException  {
-		// TODO Auto-generated method stub
 		//1、获取查询条件
 		int who = Integer.parseInt((String) request.getParameter("who"));
 		request.setAttribute("shenpi", true);
@@ -339,13 +316,11 @@ public class LeaveApplicationServlet extends HttpServlet {
 		request.setAttribute("forwordUrl",url);	
 	}
 	private void shenpi(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-		// TODO Auto-generated method stub
 		request.setAttribute("shenpi", true);
 		request.setAttribute("option", OPTION_DO_SHENPI);
 		detail(request, response);
 	}
 	private void doShenpi(HttpServletRequest request, HttpServletResponse response)throws SQLException, ServletException, IOException, ParseException  {
-		// TODO Auto-generated method stub
 		LeaveApplication application = new LeaveApplication();
 		application.parse(request);
 		LeaveApplicationShenPi shenPi = new LeaveApplicationShenPi();
@@ -362,13 +337,50 @@ public class LeaveApplicationServlet extends HttpServlet {
 		}
 	}
 	private void over(HttpServletRequest request, HttpServletResponse response)throws SQLException, ServletException, IOException  {
-		// TODO Auto-generated method stub
-		
+		String url = "LeaveApplicationServlet?option=1&pageNo=1&type=1";
+		HttpSession session = request.getSession();
+		QingjiaSesssion qSesssion = (QingjiaSesssion) session.getAttribute(QingjiaSesssion.QINGJIA_SESSION);
+		if (!qSesssion.hasPermission("applicaton.myapplication.update") || null == qSesssion.getStudent()) {
+			MessageUtil.showMessage("销假", "没有访问权限", url, request, response);
+			return;
+		}
+		//1、查询要销假的申请
+		int id = Integer.parseInt(request.getParameter("id"));
+		LeaveApplicationView application = LeaveApplicationService.getInstance().getDetailById(id);
+		if (null == application || application.getStudentId() != qSesssion.getStudent().getId()) {
+			MessageUtil.showMessage("销假", "要销假的申请不存在", url, request, response);
+			return;
+		}
+		//2、只有审批通过的申请才能销假
+		if (application.getStatus() != LeaveApplication.STATUS_PASS) {
+			MessageUtil.showMessage("销假", "只有审批通过的申请才能销假", url, request, response);
+			return;
+		}
+		//3、进入销假确认页
+		request.setAttribute("application", application);
+		request.setAttribute("option", OPTION_DO_OVER);
+		request.getRequestDispatcher("WEB-INF/jsp/apply/over.jsp").forward(request, response);
 	}
 
 	private void doOver(HttpServletRequest request, HttpServletResponse response)throws SQLException, ServletException, IOException  {
-		// TODO Auto-generated method stub
-		
+		String url = "LeaveApplicationServlet?option=1&pageNo=1&type=3";
+		HttpSession session = request.getSession();
+		QingjiaSesssion qSesssion = (QingjiaSesssion) session.getAttribute(QingjiaSesssion.QINGJIA_SESSION);
+		if (!qSesssion.hasPermission("applicaton.myapplication.update") || null == qSesssion.getStudent()) {
+			MessageUtil.showMessage("销假", "没有访问权限", url, request, response);
+			return;
+		}
+		int id = Integer.parseInt(request.getParameter("id"));
+		LeaveApplicationView application = LeaveApplicationService.getInstance().getDetailById(id);
+		if (null == application || application.getStudentId() != qSesssion.getStudent().getId()) {
+			MessageUtil.showMessage("销假", "要销假的申请不存在", url, request, response);
+			return;
+		}
+		if (LeaveApplicationService.getInstance().over(id)) {
+			MessageUtil.showMessage("销假", "销假成功，本次请假已结束", url, request, response);
+		}else{
+			MessageUtil.showMessage("销假", "销假失败，只有审批通过的申请才能销假", url, request, response);
+		}
 	}
 
 	
@@ -377,7 +389,6 @@ public class LeaveApplicationServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

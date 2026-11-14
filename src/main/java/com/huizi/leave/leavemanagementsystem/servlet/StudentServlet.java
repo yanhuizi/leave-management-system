@@ -3,7 +3,6 @@ package com.huizi.leave.leavemanagementsystem.servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.text.html.HTML;
 
 
 import com.google.gson.Gson;
@@ -51,14 +49,12 @@ public class StudentServlet extends HttpServlet {
      */
     public StudentServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		int option = Integer.parseInt(request.getParameter("option"));
 		HttpSession session = request.getSession();
 		QingjiaSesssion qingjiaSesssion = (QingjiaSesssion)session.getAttribute("qSession");
@@ -72,7 +68,6 @@ public class StudentServlet extends HttpServlet {
 			try {
 				query(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -82,7 +77,6 @@ public class StudentServlet extends HttpServlet {
 			try {
 				add(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -92,7 +86,6 @@ public class StudentServlet extends HttpServlet {
 			try {
 				doAdd(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				MessageUtil.showMessage("添加学生", "添加失败", "StudentServlet?option=1&pageNo=1", request, response);
 			}
@@ -103,7 +96,6 @@ public class StudentServlet extends HttpServlet {
 			try {
 				update(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -113,7 +105,6 @@ public class StudentServlet extends HttpServlet {
 			try {
 				doUpdate(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -123,7 +114,6 @@ public class StudentServlet extends HttpServlet {
 			try {
 				detail(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -133,7 +123,6 @@ public class StudentServlet extends HttpServlet {
 			try {
 				ResetPassword(request,response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -143,7 +132,6 @@ public class StudentServlet extends HttpServlet {
 			try {
 				queryByNum(request,response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -159,7 +147,6 @@ public class StudentServlet extends HttpServlet {
 	
 
 	private void query(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, SQLException {
-		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		QingjiaSesssion qSesssion = (QingjiaSesssion) session.getAttribute(QingjiaSesssion.QINGJIA_SESSION);
 		//获取查询条件
@@ -204,7 +191,6 @@ public class StudentServlet extends HttpServlet {
 	}
 
 	private void add(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, SQLException {
-		// TODO Auto-generated method stub
 		request.setAttribute("option", OPTION_DO_ADD);
 		HttpSession session = request.getSession();
 		QingjiaSesssion qSesssion = (QingjiaSesssion) session.getAttribute(QingjiaSesssion.QINGJIA_SESSION);
@@ -215,7 +201,6 @@ public class StudentServlet extends HttpServlet {
 	}
 
 	private void doAdd(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, SQLException {
-		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		QingjiaSesssion qSesssion = (QingjiaSesssion) session.getAttribute(QingjiaSesssion.QINGJIA_SESSION);
@@ -234,7 +219,7 @@ public class StudentServlet extends HttpServlet {
 		if (StudentService.getInstance().add(student)) {
 			result = AjaxResult.success("添加成功");
 		}else{
-			result = AjaxResult.success("添加失败");
+			result = AjaxResult.failure("添加失败");
 		}
 		Gson gson = new Gson();
 		response.setContentType("text/plain;charset=utf-8");
@@ -242,7 +227,6 @@ public class StudentServlet extends HttpServlet {
 	}
 
 	private void update(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, SQLException {
-		// TODO Auto-generated method stub
 		int id = Integer.parseInt(request.getParameter("id"));
 		Student student = StudentService.getInstance().getByid(id);
 		request.setAttribute("student", student);
@@ -258,7 +242,6 @@ public class StudentServlet extends HttpServlet {
 	}
 
 	private void doUpdate(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, SQLException {
-		// TODO Auto-generated method stub
 		//获取学生信息
 		Student student = new Student();
 		student.parse(request);
@@ -268,7 +251,7 @@ public class StudentServlet extends HttpServlet {
 		if (StudentService.getInstance().update(student)) {
 			result = AjaxResult.success("修改成功");
 		}else{
-			result = AjaxResult.success("修改失败");
+			result = AjaxResult.failure("修改失败");
 		}
 		Gson gson = new Gson();
 		response.setContentType("text/plain;charset=utf-8");
@@ -276,7 +259,6 @@ public class StudentServlet extends HttpServlet {
 	}
 
 	private void detail(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, SQLException {
-		// TODO Auto-generated method stub
 		int id = Integer.parseInt(request.getParameter("id"));
 		Student student = StudentService.getInstance().getByid(id);
 		request.setAttribute("student", student);
@@ -284,7 +266,6 @@ public class StudentServlet extends HttpServlet {
 	}
 
 	private void ResetPassword(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, SQLException {
-		// TODO Auto-generated method stub
 		int id = Integer.parseInt(request.getParameter("id"));
 		if (StudentService.getInstance().resetPassword(id)) {
 			MessageUtil.showMessage("重置密码", "成功", "StudentServlet?option=1&pageNo=1", request, response);
@@ -294,7 +275,6 @@ public class StudentServlet extends HttpServlet {
 	}
 
 	private void queryByNum(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, SQLException  {
-		// TODO Auto-generated method stub
 		String num = request.getParameter("num");
 		Student student = StudentService.getInstance().getByNum(num);
 		AjaxResult result = null;
@@ -312,7 +292,6 @@ public class StudentServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

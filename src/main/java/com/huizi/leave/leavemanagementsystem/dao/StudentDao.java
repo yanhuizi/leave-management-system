@@ -47,7 +47,6 @@ public class StudentDao {
 	}
 
 	public int getTotalRecord(QingjiaSesssion qSesssion, StudentQueryCondition condition) throws SQLException {
-		// TODO Auto-generated method stub
 		Connection conn = JdbcUtil.getConnect();
 		String strCondition = getCondition(condition);
 		StringBuilder builder = new StringBuilder();
@@ -99,7 +98,6 @@ public class StudentDao {
 	}
 
 	private String getCondition(StudentQueryCondition condition) {
-		// TODO Auto-generated method stub
 		StringBuilder builder = new StringBuilder();
 		if (condition.getCollegeId() !=0 ) {
 			builder.append(" belongToCollegeId = " + condition.getCollegeId());
@@ -137,7 +135,6 @@ public class StudentDao {
 	}
 
 	public List<Student> queryPage(QingjiaSesssion qSesssion, StudentQueryCondition condition, Page page) throws SQLException {
-		// TODO Auto-generated method stub
 		List<Student> students = new ArrayList<Student>();
 		Connection conn = JdbcUtil.getConnect();
 		String strCondition = getCondition(condition);
@@ -204,7 +201,6 @@ public class StudentDao {
 	}
 
 	public boolean add(Student student) throws SQLException {
-		// TODO Auto-generated method stub
 		Connection conn = JdbcUtil.getConnect();
 		String sql = "INSERT INTO student(name,num,password,classId,sex) VALUES (?,?,?,?,?)";
 		PreparedStatement psm = JdbcUtil.getPreparedStatement(conn, sql);
@@ -220,7 +216,6 @@ public class StudentDao {
 	}
 
 	public Student getByid(int id) throws SQLException {
-		// TODO Auto-generated method stub
 		Student student = new Student();
 		Connection conn = JdbcUtil.getConnect();
 		String sql = "select * from student_view where id = ?";
@@ -245,7 +240,6 @@ public class StudentDao {
 	}
 
 	public boolean update(Student student) throws SQLException {
-		// TODO Auto-generated method stub
 		Connection conn = JdbcUtil.getConnect();
 		String sql = "UPDATE student SET name = ?,num = ?,classId = ?,sex = ? WHERE id = ?";
 		PreparedStatement psm = JdbcUtil.getPreparedStatement(conn, sql);
@@ -260,7 +254,6 @@ public class StudentDao {
 	}
 
 	public boolean resetPassword(int id) throws SQLException {
-		// TODO Auto-generated method stub
 		Connection conn = JdbcUtil.getConnect();
 		String sql = "UPDATE student SET password = num  WHERE id = ?";
 		PreparedStatement psm = JdbcUtil.getPreparedStatement(conn, sql);
@@ -271,7 +264,6 @@ public class StudentDao {
 	}
 
 	public boolean updatePassword(int id, String newPassword) throws SQLException {
-		// TODO Auto-generated method stub
 		Connection conn = JdbcUtil.getConnect();
 		String sql = "UPDATE student SET password = ?  WHERE id = ?";
 		PreparedStatement psm = JdbcUtil.getPreparedStatement(conn, sql);

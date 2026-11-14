@@ -23,37 +23,30 @@ public class StudentService {
 	}
 
 	public int getTotalRecord(QingjiaSesssion qSesssion, StudentQueryCondition condition) throws SQLException {
-		// TODO Auto-generated method stub
 		return StudentDao.getInstance().getTotalRecord(qSesssion, condition);
 	}
 
 	public List<Student> queryPage(QingjiaSesssion qSesssion, StudentQueryCondition condition, Page page) throws SQLException {
-		// TODO Auto-generated method stub
 		return StudentDao.getInstance().queryPage(qSesssion, condition, page);
 	}
 
 	public boolean add(Student student) throws SQLException {
-		// TODO Auto-generated method stub
 		return StudentDao.getInstance().add(student);
 	}
 
 	public Student getByid(int id) throws SQLException {
-		// TODO Auto-generated method stub
 		return StudentDao.getInstance().getByid(id);
 	}
 
 	public boolean update(Student student) throws SQLException {
-		// TODO Auto-generated method stub
 		return StudentDao.getInstance().update(student);
 	}
 
 	public boolean resetPassword(int id) throws SQLException {
-		// TODO Auto-generated method stub
 		return StudentDao.getInstance().resetPassword(id);
 	}
 
 	public boolean updatePassword(int id,String newPassword) throws SQLException {
-		// TODO Auto-generated method stub
 		return StudentDao.getInstance().updatePassword(id,newPassword);
 	}
 }

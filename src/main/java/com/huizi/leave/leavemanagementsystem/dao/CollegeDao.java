@@ -24,7 +24,6 @@ public class CollegeDao {
 		return instance;
 	}
 	public List<College> getAll() throws SQLException {
-		// TODO Auto-generated method stub
 		List<College> colleges = new ArrayList<College>();
 		Connection conn = JdbcUtil.getConnect();
 		
@@ -43,7 +42,6 @@ public class CollegeDao {
 		return colleges;
 	}
 	public boolean add(College college) throws SQLException {
-		// TODO Auto-generated method stub
 		Connection conn = JdbcUtil.getConnect();
 		String sql = "INSERT INTO college(name,num) VALUES (?,?)";
 		PreparedStatement psm = JdbcUtil.getPreparedStatement(conn, sql);
@@ -54,7 +52,6 @@ public class CollegeDao {
 		return count==1;
 	}
 	public College getById(String id) throws SQLException {
-		// TODO Auto-generated method stub
 		Connection conn = JdbcUtil.getConnect();
 		
 		String sql = "SELECT * FROM college WHERE id = ?";
@@ -73,7 +70,6 @@ public class CollegeDao {
 		return college;
 	}
 	public boolean updateById(College college) throws SQLException {
-		// TODO Auto-generated method stub
 		Connection conn = JdbcUtil.getConnect();
 		String sql = "UPDATE college SET name = ?,num = ? WHERE id = ?";
 		PreparedStatement psm = JdbcUtil.getPreparedStatement(conn, sql);
@@ -85,7 +81,6 @@ public class CollegeDao {
 		return count==1;
 	}
 	public List<College> getByRequest(HttpServletRequest request) throws SQLException {
-		// TODO Auto-generated method stub
 		Connection conn = JdbcUtil.getConnect();
 		PreparedStatement psm;
 		

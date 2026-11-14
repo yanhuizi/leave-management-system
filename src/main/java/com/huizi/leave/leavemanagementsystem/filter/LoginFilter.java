@@ -35,21 +35,18 @@ public class LoginFilter implements Filter {
      * Default constructor. 
      */
     public LoginFilter() {
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see Filter#destroy()
 	 */
 	public void destroy() {
-		// TODO Auto-generated method stub
 	}
 
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
 		HttpServletRequest hRequest = (HttpServletRequest)request;
 		HttpServletResponse hResponse = (HttpServletResponse)response;
 		
@@ -61,21 +58,18 @@ public class LoginFilter implements Filter {
 		if (checkUrl(url)) {
 			chain.doFilter(hRequest, hResponse);
 		}else{
+			//未登录或会话已过期：重定向到登录页，避免登录页被转发进 frameset 的某个框架里导致显示错乱。
 			HttpSession session = hRequest.getSession(false);
-			if (session == null) {
-				request.getRequestDispatcher("/login.jsp").forward(hRequest, hResponse);
+			QingjiaSesssion qSesssion = null;
+			if (session != null) {
+				qSesssion = (QingjiaSesssion) session.getAttribute(QingjiaSesssion.QINGJIA_SESSION);
+			}
+			if (qSesssion == null) {
+				hResponse.sendRedirect(contextPath + "/login.jsp");
 			}else{
-				
-				QingjiaSesssion qSesssion = (QingjiaSesssion) session.getAttribute(QingjiaSesssion.QINGJIA_SESSION);
-				if (qSesssion == null) {
-					request.getRequestDispatcher("/login.jsp").forward(hRequest, hResponse);
-				}else{
-					chain.doFilter(request, response);
-				}
-				
+				chain.doFilter(request, response);
 			}
 		}
-		
 	}
 
 	private boolean checkUrl(String url) {
@@ -93,7 +87,6 @@ public class LoginFilter implements Filter {
 	 * @see Filter#init(FilterConfig)
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
 		this.fConfig = fConfig;
 		String noFilterUrl = fConfig.getInitParameter("noFilterUrl");
 		System.out.println(noFilterUrl);

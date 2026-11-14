@@ -18,23 +18,18 @@ public class CollegeSevice {
 		return instance;
 	}
 	public List<College> getAll() throws SQLException {
-		// TODO Auto-generated method stub
 		return CollegeDao.getInstance().getAll();
 	}
 	public boolean add(College college) throws SQLException {
-		// TODO Auto-generated method stub
 		return CollegeDao.getInstance().add(college);
 	}
 	public College getById(String id) throws SQLException {
-		// TODO Auto-generated method stub
 		return CollegeDao.getInstance().getById(id);
 	}
 	public boolean updateById(College college) throws SQLException {
-		// TODO Auto-generated method stub
 		return CollegeDao.getInstance().updateById(college);
 	}
 	public List<College> getByRequest(HttpServletRequest request) throws SQLException {
-		// TODO Auto-generated method stub
 		return CollegeDao.getInstance().getByRequest(request);
 	}
 }

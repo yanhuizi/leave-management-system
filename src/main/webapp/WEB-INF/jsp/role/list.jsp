@@ -44,7 +44,7 @@ $(document).ready(function(){
 	<div class="place">
     <span>位置：</span>
     <ul class="placeul">
-    <li><a href="#">首页</a></li>
+    <li><a href="public/index.jsp">首页</a></li>
     <li><a href="RoleServlet?option=1">角色</a></li>
     <li><a href="RoleServlet?option=1">列表页</a></li>
     </ul>
@@ -107,8 +107,8 @@ $(document).ready(function(){
         </div>
         
         <div class="tipbtn">
-        <input name="" type="button"  class="sure" value="确定" />&nbsp;
-        <input name="" type="button"  class="cancel" value="取消" />
+        <input type="button"  class="sure" value="确定" />&nbsp;
+        <input type="button"  class="cancel" value="取消" />
         </div>
     
     </div>

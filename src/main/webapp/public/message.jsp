@@ -8,7 +8,7 @@
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/jquery.js"></script>
 
-<script language="javascript">
+<script>
 	$(function(){
     $('.error').css({'position':'absolute','left':($(window).width()-490)/2});
 	$(window).resize(function(){  
@@ -26,8 +26,8 @@
 	<div class="place">
     <span>位置：</span>
     <ul class="placeul">
-    <li><a href="#">首页</a></li>
-    <li><a href="#">错误提示</a></li>
+    <li><a href="public/index.jsp">首页</a></li>
+    <li><a href="javascript:void(0);">错误提示</a></li>
     </ul>
     </div>
     

@@ -7,7 +7,6 @@ public class AjaxResult {
 	private String message;
 	private Object object;
 	public AjaxResult() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public AjaxResult(int code, String message, Object object) {

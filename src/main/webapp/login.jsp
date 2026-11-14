@@ -29,7 +29,12 @@
 
 <body style="background-color:#1c77ac; background-image:url(images/light.png); background-repeat:no-repeat; background-position:center top; overflow:hidden;">
 
-
+<script type="text/javascript">
+	//被登录拦截器重定向到登录页时，如果登录页出现在框架内，跳转到顶层窗口，避免界面显示不全。
+	if (window.top !== window.self) {
+		window.top.location.href = window.location.href;
+	}
+</script>
 
     <div id="mainBody">
       <div id="cloud1" class="cloud"></div>
@@ -40,9 +45,9 @@
 <div class="logintop">    
     <span>欢迎登录后台管理界面平台</span>    
     <ul>
-    <li><a href="#">回首页</a></li>
-    <li><a href="#">帮助</a></li>
-    <li><a href="#">关于</a></li>
+    <li><a href="javascript:void(0);">回首页</a></li>
+    <li><a href="javascript:void(0);">帮助</a></li>
+    <li><a href="javascript:void(0);">关于</a></li>
     </ul>    
     </div>
     
@@ -54,9 +59,9 @@
     <form action="LoginServlet">
     	<ul>
 			<li><input name="option" type="hidden" class="loginuser" value="1"/></li>
-   		 	<li><input name="num" type="text" class="loginuser" value="1997013" onclick="JavaScript:this.value=''"/></li>
-    	 	<li><input name="password" type="text" class="loginpwd" value="123456" onclick="JavaScript:this.value=''"/></li>
-    	 	<li><input name="" type="submit" class="loginbtn" value="登录"  /><label><input name="" type="checkbox" value="" checked="checked" />记住密码</label><label><a href="#">忘记密码？</a></label></li>   
+   		 	<li><input name="num" type="text" class="loginuser" value="1997013" onclick="this.value=''"/></li>
+    	 	<li><input name="password" type="text" class="loginpwd" value="123456" onclick="this.value=''"/></li>
+    	 	<li><input type="submit" class="loginbtn" value="登录"  /><label><input type="checkbox" value="" checked="checked" />记住密码</label><label><a href="javascript:void(0);">忘记密码？</a></label></li>   
 		</ul>
     </form>
     </div>

@@ -13,7 +13,8 @@ public class LeaveApplication {
 	public static final int STATUS_BANZHREN_PASS = 2;//班主任审批通过
 	public static final int STATUS_FUDAOYUAN_PASS = 3;//辅导员审批通过
 	public static final int STATUS_PASS = 4;//审批通过
-	public static final int STATUS_OVER = 5;//结束
+	public static final int STATUS_NOT_PASS = 5;//审批未通过
+	public static final int STATUS_OVER = 6;//结束（销假后）
 	
 	public static final int TYPE_IN_ONE = 1;//一天以内
 	public static final int TYPE_BETWEEM_ONE_THREE = 2;//一天以外三天以内

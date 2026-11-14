@@ -19,9 +19,9 @@
 	<div class="place">
     <span>位置：</span>
     <ul class="placeul">
-    <li><a href="#">首页</a></li>
+    <li><a href="public/index.jsp">首页</a></li>
     <li><a href="RoleServlet?option=1">班级</a></li>
-    <li><a href="#">班级详情</a></li>
+    <li><a href="javascript:void(0);">班级详情</a></li>
     </ul>
     </div>
     
