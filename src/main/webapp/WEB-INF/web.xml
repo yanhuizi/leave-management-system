@@ -5,26 +5,24 @@
          version="4.0">
     <display-name>leave-management-system</display-name>
 
+    <!-- 素材 qingjia 工程的初始化 Servlet：启动时把字典数据放进 application。 -->
+    <servlet>
+        <servlet-name>InitServlet</servlet-name>
+        <servlet-class>com.huizi.leave.leavemanagementsystem.servlet.InitServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <!-- 素材的分页过滤器：pageNo 参数与 forwordUrl 转发。 -->
+    <filter>
+        <filter-name>pageFilter</filter-name>
+        <filter-class>com.huizi.leave.leavemanagementsystem.page.PageFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>pageFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <welcome-file-list>
         <welcome-file>login.jsp</welcome-file>
     </welcome-file-list>
-
-    <session-config>
-        <session-timeout>30</session-timeout>
-    </session-config>
-
-    <context-param><param-name>applicationName</param-name><param-value>请假管理系统</param-value></context-param>
-    <!-- 第二章动态下载/文件管理示例的文件根目录。程序会自动创建目录。 -->
-    <context-param><param-name>file_download_path</param-name><param-value>D:\upload</param-value></context-param>
-    <servlet>
-        <servlet-name>appStartup</servlet-name>
-        <servlet-class>com.huizi.leave.leavemanagementsystem.AppStartupServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping><servlet-name>appStartup</servlet-name><url-pattern>/app-status</url-pattern></servlet-mapping>
-
-    <servlet><servlet-name>wildcardServlet</servlet-name><servlet-class>com.huizi.leave.leavemanagementsystem.WildcardServlet</servlet-class></servlet>
-    <servlet-mapping><servlet-name>wildcardServlet</servlet-name><url-pattern>/demo/*</url-pattern></servlet-mapping>
-    <servlet><servlet-name>genericDemo</servlet-name><servlet-class>com.huizi.leave.leavemanagementsystem.GenericDemoServlet</servlet-class><load-on-startup>2</load-on-startup></servlet>
-    <servlet-mapping><servlet-name>genericDemo</servlet-name><url-pattern>/generic-demo</url-pattern></servlet-mapping>
 </web-app>
