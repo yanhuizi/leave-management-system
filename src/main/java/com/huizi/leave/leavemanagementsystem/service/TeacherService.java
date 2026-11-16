@@ -44,4 +44,7 @@ public class TeacherService {
 	public boolean ResetPassword(int id) throws SQLException {
 		return TeacherDao.getInstance().ResetPassword(id);
 	}
+	public boolean updatePassword(int id, String newPassword) throws SQLException {
+		return TeacherDao.getInstance().updatePassword(id, newPassword);
+	}
 }

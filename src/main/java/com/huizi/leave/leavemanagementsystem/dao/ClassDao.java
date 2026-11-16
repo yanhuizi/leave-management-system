@@ -35,8 +35,9 @@ public class ClassDao {
 			clazz = new Clazz();
 			clazz.setId(set.getInt(1));
 			clazz.setNum(set.getString(2));
-			clazz.setBelongToCollegeId(set.getInt(3));
-			clazz.setBanZhuRenId(set.getInt(4));
+			clazz.setGradeId(set.getInt(3));
+			clazz.setBelongToCollegeId(set.getInt(4));
+			clazz.setBanZhuRenId(set.getInt(5));
 			clazzs.add(clazz);
 		}
 		JdbcUtil.closeConnectionStateMent(conn, psm);
@@ -246,12 +247,12 @@ public class ClassDao {
 		List<Grade> grades = new ArrayList<Grade>();
 		Connection conn = JdbcUtil.getConnect();
 		
-		String sql = "SELECT * FROM grade WHERE id in (?)";
+		String sql = "SELECT * FROM grade WHERE FIND_IN_SET(id, ?)";
 		PreparedStatement psm = JdbcUtil.getPreparedStatement(conn, sql);
 		psm.setString(1, strGrades);
 		ResultSet set = psm.executeQuery();
 		Grade grade;
-		if(set.next()){
+		while(set.next()){
 			grade = new Grade();
 			grade.setId(set.getInt(1));
 			grade.setGrade(set.getInt(2));

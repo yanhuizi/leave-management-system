@@ -242,4 +242,14 @@ public class TeacherDao {
 		JdbcUtil.closeConnectionStateMent(conn, psm);
 		return count==1;
 	}
+	public boolean updatePassword(int id, String newPassword) throws SQLException {
+		Connection conn = JdbcUtil.getConnect();
+		String sql = "UPDATE teacher SET password = ?  WHERE id = ?";
+		PreparedStatement psm = JdbcUtil.getPreparedStatement(conn, sql);
+		psm.setString(1, newPassword);
+		psm.setInt(2, id);
+		int count = psm.executeUpdate();
+		JdbcUtil.closeConnectionStateMent(conn, psm);
+		return count==1;
+	}
 }

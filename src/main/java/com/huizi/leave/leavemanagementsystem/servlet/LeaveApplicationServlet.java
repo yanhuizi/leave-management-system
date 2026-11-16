@@ -240,8 +240,24 @@ public class LeaveApplicationServlet extends HttpServlet {
 	}
 
 	private void update(HttpServletRequest request, HttpServletResponse response)throws SQLException, ServletException, IOException  {
+		String url = "LeaveApplicationServlet?option=1&pageNo=1&type=1";
+		HttpSession session = request.getSession();
+		QingjiaSesssion qSesssion = (QingjiaSesssion) session.getAttribute(QingjiaSesssion.QINGJIA_SESSION);
+		if (!qSesssion.hasPermission("applicaton.myapplication.update") || null == qSesssion.getStudent()) {
+			MessageUtil.showMessage("修改请假申请", "没有访问权限", url, request, response);
+			return;
+		}
 		int id = Integer.parseInt(request.getParameter("id"));
 		LeaveApplication application = LeaveApplicationService.getInstance().getById(id);
+		if (null == application || application.getStudentId() != qSesssion.getStudent().getId()) {
+			MessageUtil.showMessage("修改请假申请", "要修改的申请不存在", url, request, response);
+			return;
+		}
+		//只有待审批的申请才能修改
+		if (application.getStatus() != LeaveApplication.STATUS_DAI_SHEN_PI) {
+			MessageUtil.showMessage("修改请假申请", "只有待审批的申请才能修改", url, request, response);
+			return;
+		}
 		application.setH5Begintime(DateUtil.dateToH5String(application.getBegintime()));
 		application.setH5Endtime(DateUtil.dateToH5String(application.getEndtime()));
 		request.setAttribute("application", application);
@@ -251,8 +267,25 @@ public class LeaveApplicationServlet extends HttpServlet {
 	}
 
 	private void doUpdate(HttpServletRequest request, HttpServletResponse response)throws SQLException, ServletException, IOException, ParseException  {
+		String url = "LeaveApplicationServlet?option=1&pageNo=1&type=1";
+		HttpSession session = request.getSession();
+		QingjiaSesssion qSesssion = (QingjiaSesssion) session.getAttribute(QingjiaSesssion.QINGJIA_SESSION);
+		if (!qSesssion.hasPermission("applicaton.myapplication.update") || null == qSesssion.getStudent()) {
+			MessageUtil.showMessage("修改请假申请", "没有访问权限", url, request, response);
+			return;
+		}
 		LeaveApplication application = new LeaveApplication();
 		application.parse(request);
+		LeaveApplication original = LeaveApplicationService.getInstance().getById(application.getId());
+		if (null == original || original.getStudentId() != qSesssion.getStudent().getId()) {
+			MessageUtil.showMessage("修改请假申请", "要修改的申请不存在", url, request, response);
+			return;
+		}
+		//只有待审批的申请才能修改
+		if (original.getStatus() != LeaveApplication.STATUS_DAI_SHEN_PI) {
+			MessageUtil.showMessage("修改请假申请", "只有待审批的申请才能修改", url, request, response);
+			return;
+		}
 		if (LeaveApplicationService.getInstance().update(application)) {
 			MessageUtil.showMessage("修改请假申请", "修改成功", "LeaveApplicationServlet?option=1&pageNo=1&type=1", request, response);
 		}else {

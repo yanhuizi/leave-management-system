@@ -62,7 +62,7 @@ public class StudentDao {
 				builder.replace(builder.length()-1,builder.length(), "");
 				areaClause = builder.toString();
 			}
-			sqlBuilder.append(" WHERE classId IN (?) ");
+			sqlBuilder.append(" WHERE FIND_IN_SET(classId, ?) ");
 			
 			if (strCondition != null) {
 				sqlBuilder.append(" AND ");
@@ -75,10 +75,9 @@ public class StudentDao {
 			if ( strCondition != null) {
 				sqlBuilder.append(" AND ");
 				sqlBuilder.append(strCondition);
-				psm = JdbcUtil.getPreparedStatement(conn, sqlBuilder.toString());
-				psm.setInt(1, qSesssion.getCollegeId());
 			}
-			
+			psm = JdbcUtil.getPreparedStatement(conn, sqlBuilder.toString());
+			psm.setInt(1, qSesssion.getCollegeId());
 		}else {
 			if ( strCondition != null) {
 				sqlBuilder.append(" WHERE ");
@@ -151,7 +150,7 @@ public class StudentDao {
 				builder.replace(builder.length()-1,builder.length(), "");
 				areaClause = builder.toString();
 			}
-			sqlBuilder.append(" WHERE classId IN (?) ");
+			sqlBuilder.append(" WHERE FIND_IN_SET(classId, ?) ");
 			
 			if (strCondition != null) {
 				sqlBuilder.append(" AND ");
@@ -167,12 +166,11 @@ public class StudentDao {
 			if ( strCondition != null) {
 				sqlBuilder.append(" AND ");
 				sqlBuilder.append(strCondition);
-				psm = JdbcUtil.getPreparedStatement(conn, sqlBuilder.toString());
-				psm.setInt(1, qSesssion.getCollegeId());
 			}
 			sqlBuilder.append(" ORDER BY id DESC ");
 			sqlBuilder.append(" limit " + ((page.getPageNo()-1)*page.getPageSize()+ "," +page.getPageSize()));
-			psm = JdbcUtil.getPreparedStatement(conn, sqlBuilder.toString());				
+			psm = JdbcUtil.getPreparedStatement(conn, sqlBuilder.toString());
+			psm.setInt(1, qSesssion.getCollegeId());			
 		}else {
 			if ( strCondition != null) {
 				sqlBuilder.append(" WHERE ");

@@ -201,7 +201,7 @@ public class LeaveApplicationDao {
 	public int getBanzhurenShenPiTotalRocords(int statusDaiShenPi, String manageClasses) throws SQLException {
 		int totalRecordes = 0;
 		Connection conn = JdbcUtil.getConnect();
-		String sql = "select count(*) as count from leave_application_view WHERE status = ? AND classId in (?) ";
+		String sql = "select count(*) as count from leave_application_view WHERE status = ? AND FIND_IN_SET(classId, ?) ";
 		PreparedStatement psm = JdbcUtil.getPreparedStatement(conn, sql);
 		psm.setInt(1, statusDaiShenPi);
 		psm.setString(2, manageClasses);
@@ -216,7 +216,7 @@ public class LeaveApplicationDao {
 	public List<LeaveApplicationView> getBanzhurenShenPiPage(int statusDaiShenPi, String manageClasses, Page page) throws SQLException {
 		List<LeaveApplicationView> applications = new ArrayList<LeaveApplicationView>();
 		Connection conn = JdbcUtil.getConnect();
-		StringBuilder builder = new StringBuilder("select * from leave_application_view WHERE status = ? AND classId in (?) ");
+		StringBuilder builder = new StringBuilder("select * from leave_application_view WHERE status = ? AND FIND_IN_SET(classId, ?) ");
 		String sql = "";
 		builder.append(" ORDER BY id DESC  ");
 		builder.append(" limit " + ((page.getPageNo()-1)*page.getPageSize()+ "," +page.getPageSize()));

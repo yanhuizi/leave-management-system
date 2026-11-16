@@ -209,12 +209,12 @@ public class LoginServlet extends HttpServlet {
 		qSession.setStudent(student);
 		qSession.setClassId(student.getClassId());
 		Clazz clazz = ClassService.getInstance().getById(student.getClassId());
-		qSession.setCollegeId(clazz.getGradeId());
+		qSession.setCollegeId(clazz.getBelongToCollegeId());
 		qSession.setClazz(clazz);
 		List<Clazz> clazzs = new ArrayList<Clazz>();
 		clazzs.add(clazz);
 		qSession.setClazzes(clazzs);
-		List<Grade> grades = ClassService.getInstance().getGradesByIds(""+clazz.getId());
+		List<Grade> grades = ClassService.getInstance().getGradesByIds(""+clazz.getGradeId());
 		qSession.setGrades(grades);
 		qSession.setPermissiones(PermissionService.getInstance().getPermissionByStudentRoleId());
 		
@@ -253,7 +253,23 @@ public class LoginServlet extends HttpServlet {
 				}
 			}
 		}else{
-			
+			//教师修改密码
+			Teacher teacher = qSesssion.getTeacher();
+			if (!teacher.getPassword().equals(old)) {
+				MessageUtil.showMessage("修改密码", "旧密码不正确", "LoginServlet?option=3", request, response);
+			}else{
+				if (!newPassword.equals(again)) {
+					MessageUtil.showMessage("修改密码", "新密码两次输入不同", "LoginServlet?option=3", request, response);				
+				}else {
+					if(TeacherService.getInstance().updatePassword(teacher.getId(),newPassword))
+					{
+						request.getSession().invalidate();
+						MessageUtil.showMessage("修改密码", "修改成功", "login.jsp", request, response);				
+					}else{
+						MessageUtil.showMessage("修改密码", "修改失败", "LoginServlet?option=3", request, response);				
+					}
+				}
+			}
 		}
 	}
 
