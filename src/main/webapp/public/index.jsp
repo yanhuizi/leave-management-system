@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -9,7 +10,7 @@
 <head>
 <base href="<%=basePath%>" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
+<title>请假管理系统</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/jquery.js"></script>
 
@@ -30,56 +31,50 @@
     
     <div class="welinfo">
     <span><img src="images/sun.png" alt="天气" /></span>
-    <b>Admin早上好，欢迎使用信息管理系统</b>(admin@uimaker.com)
-    <a href="javascript:void(0);">帐号设置</a>
+    <b>
+    <c:if test="${sessionScope.qSession.userType == 1}">${sessionScope.qSession.teacher.name}</c:if>
+    <c:if test="${sessionScope.qSession.userType == 2}">${sessionScope.qSession.student.name}</c:if>
+    你好，欢迎使用请假管理系统</b>
+    <a href="SettingServlet" target="rightFrame">个人中心</a>
     </div>
     
     <div class="welinfo">
     <span><img src="images/time.png" alt="时间" /></span>
-    <i>您上次登录的时间：2013-10-09 15:22</i> （不是您登录的？<a href="javascript:void(0);">请点这里</a>）
+    <i>今天是 <%= new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()) %>，祝您工作学习愉快</i>
     </div>
     
     <div class="xline"></div>
     
     <ul class="iconlist">
     
-    <li><img src="images/ico01.png" /><p><a href="javascript:void(0);">管理设置</a></p></li>
-    <li><img src="images/ico02.png" /><p><a href="javascript:void(0);">发布文章</a></p></li>
-    <li><img src="images/ico03.png" /><p><a href="javascript:void(0);">数据统计</a></p></li>
-    <li><img src="images/ico04.png" /><p><a href="javascript:void(0);">文件上传</a></p></li>
-    <li><img src="images/ico05.png" /><p><a href="javascript:void(0);">目录管理</a></p></li>
-    <li><img src="images/ico06.png" /><p><a href="javascript:void(0);">查询</a></p></li> 
+    <li><img src="images/ico01.png" /><p><a href="LeaveApplicationServlet?option=2" target="rightFrame">请假申请</a></p></li>
+    <li><img src="images/ico02.png" /><p><a href="LeaveApplicationServlet?option=1&pageNo=1&type=1" target="rightFrame">我的申请</a></p></li>
+    <li><img src="images/ico03.png" /><p><a href="StatServlet" target="rightFrame">数据统计</a></p></li>
+    <li><img src="images/ico04.png" /><p><a href="SettingServlet" target="rightFrame">个人中心</a></p></li>
+    <li><img src="images/ico05.png" /><p><a href="LoginServlet?option=3" target="rightFrame">修改密码</a></p></li>
+    <li><img src="images/ico06.png" /><p><a href="help.jsp" target="rightFrame">使用帮助</a></p></li> 
             
     </ul>
     
-    <div class="ibox"><a class="ibtn"><img src="images/iadd.png" />添加新的快捷功能</a></div>
+    <div class="ibox"><a class="ibtn" href="LeaveApplicationServlet?option=2" target="rightFrame"><img src="images/iadd.png" />发起新的请假申请</a></div>
     
     <div class="xline"></div>
     <div class="box"></div>
     
     <div class="welinfo">
     <span><img src="images/dp.png" alt="提醒" /></span>
-    <b>Uimaker信息管理系统使用指南</b>
+    <b>请假管理系统使用指南</b>
     </div>
     
     <ul class="infolist">
-    <li><span>您可以快速进行文章发布管理操作</span><a class="ibtn">发布或管理文章</a></li>
-    <li><span>您可以快速发布产品</span><a class="ibtn">发布或管理产品</a></li>
-    <li><span>您可以进行密码修改、账户设置等操作</span><a class="ibtn">账户管理</a></li>
+    <li><span>学生可在“我的申请”中查看申请进度，审批通过后返校及时销假</span><a class="ibtn" href="LeaveApplicationServlet?option=1&pageNo=1&type=1" target="rightFrame">查看我的申请</a></li>
+    <li><span>教师可查看所辖班级学生的请假申请并完成审批</span><a class="ibtn" href="LeaveApplicationServlet?option=9&pageNo=1&who=1" target="rightFrame">进入审批</a></li>
+    <li><span>可修改个人密码，忘记密码请联系管理员重置</span><a class="ibtn" href="LoginServlet?option=3" target="rightFrame">修改密码</a></li>
     </ul>
     
     <div class="xline"></div>
     
-    <div class="uimakerinfo"><b>查看Uimaker网站使用指南，您可以了解到多种风格的B/S后台管理界面,软件界面设计，图标设计，手机界面等相关信息</b>(<a href="http://www.uimaker.com" target="_blank">www.uimaker.com</a>)</div>
-    
-    <ul class="umlist">
-    <li><a href="javascript:void(0);">如何发布文章</a></li>
-    <li><a href="javascript:void(0);">如何访问网站</a></li>
-    <li><a href="javascript:void(0);">如何管理广告</a></li>
-    <li><a href="javascript:void(0);">后台用户设置(权限)</a></li>
-    <li><a href="javascript:void(0);">系统设置</a></li>
-    </ul>
-    
+    <div class="uimakerinfo"><b>请假管理系统</b>：面向学院学生与教师，覆盖请假申请、多级审批、销假及基础信息维护的全流程管理。</div>
     
     </div>
     

@@ -10,7 +10,7 @@
 <head>
 <base href="<%=basePath%>" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
+<title>请假管理系统</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 <script src="js/jquery.js"></script>
 
@@ -93,13 +93,12 @@ $(function(){
     </dd>  
     </c:if>
     
-    <dd><div class="title"><span><img src="images/leftico04.png" /></span>日期管理</div>
+    <dd><div class="title"><span><img src="images/leftico04.png" /></span>快捷功能</div>
     <ul class="menuson">
-        <!-- 后台模板自带的演示菜单，本系统没有对应模块，点击不跳转，仅作界面占位。 -->
-        <li><cite></cite><a href="javascript:void(0);" title="模板占位菜单，本系统无此功能">自定义</a><i></i></li>
-        <li><cite></cite><a href="javascript:void(0);" title="模板占位菜单，本系统无此功能">常用资料</a><i></i></li>
-        <li><cite></cite><a href="javascript:void(0);" title="模板占位菜单，本系统无此功能">信息列表</a><i></i></li>
-        <li><cite></cite><a href="javascript:void(0);" title="模板占位菜单，本系统无此功能">其他</a><i></i></li>
+        <li><cite></cite><a href="StatServlet" target="rightFrame">数据统计</a><i></i></li>
+        <li><cite></cite><a href="SettingServlet" target="rightFrame">个人中心</a><i></i></li>
+        <li><cite></cite><a href="LoginServlet?option=3" target="rightFrame">修改密码</a><i></i></li>
+        <li><cite></cite><a href="help.jsp" target="rightFrame">使用帮助</a><i></i></li>
     </ul>
     
     </dd>   

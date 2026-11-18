@@ -10,7 +10,7 @@
 <head>
 <base href="<%=basePath%>" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
+<title>班级信息</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/jquery.js"></script>
 
@@ -50,8 +50,8 @@ function formSubmit(){
     <span>位置：</span>
     <ul class="placeul">
     <li><a href="public/index.jsp">首页</a></li>
-    <li><a href="ClassServlet?option=1">角色</a></li>
-    <li><a href="ClassServlet?option=1">列表页</a></li>
+    <li><a href="ClassServlet?option=1&pageNo=1">班级信息</a></li>
+    <li><a href="ClassServlet?option=1&pageNo=1">列表页</a></li>
     </ul>
     </div>
     

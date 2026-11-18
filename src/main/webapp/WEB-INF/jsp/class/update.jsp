@@ -20,9 +20,8 @@
     <span>位置：</span>
     <ul class="placeul">
     <li><a href="public/index.jsp">首页</a></li>
-    <li><a href="RoleServlet?option=1">班级</a></li>
-    
-    </ul>
+    <li><a href="ClassServlet?option=1&pageNo=1">班级信息</a></li>
+    <li>修改班级</li></ul>
     </div>
     
     <div class="formbody">

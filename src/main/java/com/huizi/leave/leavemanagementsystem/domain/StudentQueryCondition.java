@@ -14,7 +14,7 @@ public class StudentQueryCondition {
 		String strcollegeId = request.getParameter("collegeId");
 		String strgradeId= request.getParameter("gradeId");
 		String strclassId= request.getParameter("classId");
-		String strSexId     = request.getParameter("sexId");
+		String strSexId     = request.getParameter("sex");
 		if (null!=strcollegeId) {
 			collegeId = Integer.parseInt(strcollegeId);
 		}

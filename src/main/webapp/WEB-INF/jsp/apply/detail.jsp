@@ -20,8 +20,8 @@
 		<span>位置：</span>
 		<ul class="placeul">
 			<li><a href="public/index.jsp">首页</a></li>
-			<li><a href="RoleServlet?option=1">请假</a></li>
-			<li><a href="RoleServlet?option=2">请假详情</a></li>
+			<li><a href="LeaveApplicationServlet?option=1&pageNo=1&type=1">我的申请</a></li>
+			<li>请假详情</li>
 		</ul>
 	</div>
 

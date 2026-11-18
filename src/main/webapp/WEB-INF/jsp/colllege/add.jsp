@@ -20,8 +20,8 @@
     <span>位置：</span>
     <ul class="placeul">
     <li><a href="public/index.jsp">首页</a></li>
-    <li><a href="RoleServlet?option=1">基本信息</a></li>
-    <li><a href="RoleServlet?option=2">添加学院</a></li>
+    <li><a href="CollegeServlet?option=1">学院信息</a></li>
+    <li><a href="CollegeServlet?option=2">添加学院</a></li>
     </ul>
     </div>
     

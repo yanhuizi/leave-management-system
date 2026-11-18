@@ -10,7 +10,7 @@
 <head>
 <base href="<%=basePath%>" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>添加角色</title>
+<title>班级详情</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -20,8 +20,8 @@
     <span>位置：</span>
     <ul class="placeul">
     <li><a href="public/index.jsp">首页</a></li>
-    <li><a href="RoleServlet?option=1">班级</a></li>
-    <li><a href="javascript:void(0);">班级详情</a></li>
+    <li><a href="ClassServlet?option=1">班级信息</a></li>
+    <li>班级详情</li>
     </ul>
     </div>
     

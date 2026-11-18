@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
+<title>提示信息</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/jquery.js"></script>
 
@@ -27,7 +27,7 @@
     <span>位置：</span>
     <ul class="placeul">
     <li><a href="public/index.jsp">首页</a></li>
-    <li><a href="javascript:void(0);">错误提示</a></li>
+    <li>提示信息</li>
     </ul>
     </div>
     

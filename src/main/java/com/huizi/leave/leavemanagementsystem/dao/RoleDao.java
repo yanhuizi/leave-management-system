@@ -133,12 +133,14 @@ public class RoleDao {
 			psm.setInt(1, roleId);
 			psm.execute();
 			//2、添加新的权限
-			for (String permission : permissiones) {
-				sql = "INSERT INTO role_menu(roleId,menuId) VALUES(?,?) ";
-				psm = JdbcUtil.getPreparedStatement(conn, sql);
-				psm.setInt(1, roleId);
-				psm.setString(2, permission);
-				psm.execute();
+			if (permissiones != null) {
+				for (String permission : permissiones) {
+					sql = "INSERT INTO role_menu(roleId,menuId) VALUES(?,?) ";
+					psm = JdbcUtil.getPreparedStatement(conn, sql);
+					psm.setInt(1, roleId);
+					psm.setString(2, permission);
+					psm.execute();
+				}
 			}
 			conn.commit();
 		} catch (Exception e) {

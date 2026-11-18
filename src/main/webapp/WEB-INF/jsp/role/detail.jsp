@@ -20,8 +20,8 @@
     <span>位置：</span>
     <ul class="placeul">
     <li><a href="public/index.jsp">首页</a></li>
-    <li><a href="RoleServlet?option=1">角色</a></li>
-    <li><a href="javascript:void(0);">角色详情</a></li>
+    <li><a href="RoleServlet?option=1">角色管理</a></li>
+    <li>角色详情</li>
     </ul>
     </div>
 

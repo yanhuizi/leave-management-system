@@ -217,12 +217,14 @@ public class TeacherDao {
 			psm.setInt(1, id);
 			psm.execute();
 			//2、添加新的权限
-			for (String permission : permissiones) {
-				sql = "INSERT INTO user_role(userid,roleid) VALUES(?,?) ";
-				psm = JdbcUtil.getPreparedStatement(conn, sql);
-				psm.setInt(1, id);
-				psm.setString(2, permission);
-				psm.execute();
+			if (permissiones != null) {
+				for (String permission : permissiones) {
+					sql = "INSERT INTO user_role(userid,roleid) VALUES(?,?) ";
+					psm = JdbcUtil.getPreparedStatement(conn, sql);
+					psm.setInt(1, id);
+					psm.setString(2, permission);
+					psm.execute();
+				}
 			}
 			conn.commit();
 		} catch (Exception e) {

@@ -10,7 +10,7 @@
 <head>
 <base href="<%=basePath%>" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>添加角色</title>
+<title>指定角色</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 	<style>
 		.menu_module{
@@ -35,8 +35,8 @@
     <span>位置：</span>
     <ul class="placeul">
     <li><a href="public/index.jsp">首页</a></li>
-    <li><a href="RoleServlet?option=1">角色</a></li>
-    <li><a href="RoleServlet?option=2">添加角色</a></li>
+    <li><a href="TeacherServlet?option=1&pageNo=1">教师信息</a></li>
+    <li>指定角色</li>
     </ul>
     </div>
     
@@ -48,7 +48,7 @@
     	<input type="hidden" name="id" value="${requestScope.id}"/>
     	<c:forEach items="${requestScope.roles }" var="role" varStatus="status">
     		<div class="menu_module">
-    			<input type="checkbox" name="pemission" value="${role.id }" ${requestScope.userRoles.contains(role)?"checked='checked'":"" }/>${role.remark }   			
+    			<input type="checkbox" name="pemission" value="${role.id }" ${requestScope.userRoles.contains(role)?"checked='checked'":"" }/>${role.name }   			
     		</div>
     	</c:forEach>
     	<ul>

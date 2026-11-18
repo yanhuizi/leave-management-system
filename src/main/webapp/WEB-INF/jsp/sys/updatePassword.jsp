@@ -10,7 +10,7 @@
 <head>
 <base href="<%=basePath%>" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>添加角色</title>
+<title>修改密码</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -20,8 +20,7 @@
     <span>位置：</span>
     <ul class="placeul">
     <li><a href="public/index.jsp">首页</a></li>
-    <li><a href="RoleServlet?option=1">角色</a></li>
-    <li><a href="RoleServlet?option=2">添加角色</a></li>
+    <li>修改密码</li>
     </ul>
     </div>
     
@@ -31,7 +30,7 @@
     <form action="LoginServlet">
     	<input type="hidden" name="option" value="${requestScope.option }">
     	<ul class="forminfo">
-    	<li><label>旧密码</label><input name="old" type="text" class="dfinput" /><i><a href="javascript:void(0);">忘记密码</a></i></li>
+    	<li><label>旧密码</label><input name="old" type="text" class="dfinput" /><i><a href="help.jsp">忘记密码</a></i></li>
     	<li><label>新密码</label><input name="new" type="text" class="dfinput" /><i>由字母和数字组成</i></li>
     	<li><label>确认</label><input name="again" type="text" class="dfinput" /><i>由字母和数字组成</i></li>
     	<li><label>&nbsp;</label><input type="submit" class="btn" value="确认保存"/></li>

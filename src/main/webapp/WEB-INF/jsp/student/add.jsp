@@ -10,7 +10,7 @@
 <head>
 <base href="<%=basePath%>" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>添加角色</title>
+<title>添加学生</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 
 
@@ -21,8 +21,8 @@
     <span>位置：</span>
     <ul class="placeul">
     <li><a href="public/index.jsp">首页</a></li>
-    <li><a href="RoleServlet?option=1">角色</a></li>
-    <li><a href="RoleServlet?option=2">添加角色</a></li>
+    <li><a href="StudentServlet?option=1&pageNo=1">学生信息</a></li>
+    <li><a href="StudentServlet?option=2">添加学生</a></li>
     </ul>
     </div>
     
@@ -82,7 +82,7 @@
         	<label>性别</label>
     		<cite>	
     			<c:forEach items="${applicationScope.sexTypes }" var="sex">
-  					<input type="radio" name="sexId" value ="${sex.id }" ${sessionScope.addSelected.sexId == sex.id?'checked=checked':''  }>${sex.name }
+  					<input type="radio" name="sex" value ="${sex.id }" ${sessionScope.addSelected.sexId == sex.id?'checked=checked':''  }>${sex.name }
   				</c:forEach>
     		</cite>
         </li>
@@ -114,7 +114,7 @@ $(document).ready(function(){
 		$name = $("input[name='name']").val();
 		$num = $("input[name='num']").val();
 		$class = $("input[name='classId']").val();
-		$sexId = $("input[name='sexId']").val();
+		$sexId = $("input[name='sex']:checked").val();
 		if($name == null ||"" == $name){
 			alert("姓名不能为空");
 			return false;

@@ -10,7 +10,7 @@
 <head>
 <base href="<%=basePath%>" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
+<title>角色管理</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/jquery.js"></script>
 
@@ -45,7 +45,7 @@ $(document).ready(function(){
     <span>位置：</span>
     <ul class="placeul">
     <li><a href="public/index.jsp">首页</a></li>
-    <li><a href="RoleServlet?option=1">角色</a></li>
+    <li><a href="RoleServlet?option=1">角色管理</a></li>
     <li><a href="RoleServlet?option=1">列表页</a></li>
     </ul>
     </div>

@@ -21,7 +21,7 @@
 		<ul class="placeul">
 			<li><a href="public/index.jsp">首页</a></li>
 			<li><a href="LeaveApplicationServlet?option=1&pageNo=1&type=2">我的申请</a></li>
-			<li><a href="javascript:void(0);">销假</a></li>
+			<li>销假</li>
 		</ul>
 	</div>
 
